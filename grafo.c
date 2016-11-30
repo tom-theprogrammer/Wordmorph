@@ -8,9 +8,7 @@ void cria_todos_grafos(t_lista * dicionario,short nmutmax[] ){
     payload_dicionario * payld = NULL;
 
     for( iterador=dicionario ;iterador != NULL; iterador = getProxElementoLista(iterador) ){
-        payld = getItemLista(iterador);
-        printf("tamanho das palavras deste grafo: %d\n",(int)payld->num_char);
-        printf("num max mut teste grafo: %d", (int)nmutmax[payld->num_char-1]);        
+        payld = getItemLista(iterador);   
         cria_grafo(payld, nmutmax[payld->num_char-1]);
     }
 
@@ -54,6 +52,7 @@ void cria_grafo( payload_dicionario * payld, short nmutmax ) {
 
     }
 
+    /*
     for( counter1 = 0; counter1 < payld->num_palavras; counter1++){
         printf(">>>NÓ: %d --->     ",counter1);
         for(aux = adj2[counter1];aux != NULL;aux=aux->prox) {
@@ -61,6 +60,7 @@ void cria_grafo( payload_dicionario * payld, short nmutmax ) {
         }
         printf("\n");
     }
+    */
 
 }
 
@@ -93,20 +93,16 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 
         dijkstra( payld_ex->pos_inicial, payld_ex->pos_final, payld_dic->adj, payld_dic->num_palavras, payld_ex->max_mutacoes , &st, &wt);
 
-                
+        /*        
         for(i=0;i<payld_dic->num_palavras;i++){
             printf("%d=%d -- %s \n",i, st[i], payld_dic->palavras[i]);
         }
+        */
+
+        /*fprintf(fp, "%s %d\n", payld_dic->palavras[payld_ex->pos_inicial] , (int) wt[ payld_ex->pos_final ] );
+        printcaminho(fp, st, payld_ex->pos_final, payld_dic->palavras);*/
 
 
-        fprintf(fp, "%s %d\n", payld_dic->palavras[payld_ex->pos_inicial] , (int) wt[ payld_ex->pos_final ] );
-        printcaminho(fp, st, payld_ex->pos_final, payld_dic->palavras);
-
-        /*for(i=payld_ex->pos_final; i != payld_ex->pos_inicial; i = st[i]){
-            printf("i= %d\n",i);
-            printf("next_i= %d\n",st[i]);
-            printf("%d - %s \n",i, payld_dic->palavras[i]);
-        }*/
 	}
 
 	fclose(fp);
@@ -136,15 +132,13 @@ void dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut,
 
     fp =FPriorIni(num_v);
 
-    printf("Inicializar variaveis \n");
     for( v = 0; v < num_v-1; v ++ ){
 		st[v] = -1;
 		wt[v] = INFINITE;
-        if(v == ini) {printf("ini=%d\n",ini); wt[v]=0;}
+        if(v == ini) {wt[v]=0;}
 		FInsere(fp, v, wt);
 	}
 
-    printf("Iniciar algoritmo \n");
     while( fp->free != 0 ) {
         if( wt[prio = FRemove(fp,wt)] != INFINITE ){
             
@@ -153,7 +147,6 @@ void dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut,
                  if(iterador->peso > max_mut*max_mut)break;
                  
                  if( wt[iterador->v_adj] > wt[prio] + (int)iterador->peso ){
-                     printf("--    ");
                      wt[iterador->v_adj] = wt[prio] + iterador->peso;
                      /*FixDown(fp->queue,iterador->v_adj, fp->free -1 ,wt );*/                     
                      FixUp(fp->queue,iterador->v_adj,wt);

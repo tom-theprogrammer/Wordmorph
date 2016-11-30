@@ -44,10 +44,10 @@ void dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut,
 
 /*fila_prioritaria.c*/
 FilaP * FPriorIni(int);		    /*Aloca e inicializa uma fila prioritaria*/
-void FInsere(FilaP * fp, int item, int weight[]);
-int FRemove(FilaP * fp,int weight[]);
-void FixUp(int queue[] , int idx, int weight[] );
-void FixDown( int queue[], int idx, int n, int weight[] );
+void FInsere(FilaP * fp, int item, short weight[]);
+int FRemove(FilaP * fp,short weight[]);
+void FixUp(int queue[] , int idx, short weight[] );
+void FixDown( int queue[], int idx, int n, short weight[] );
 
 
 

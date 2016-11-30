@@ -28,17 +28,14 @@ int main(int argc, char *argv[])
 
 	ArrumaDicionario(dicionario);
 
-	printf(">Iniciar construção de grafos: \n");
 	cria_todos_grafos(dicionario,nmutmax);
 
 	encontraposicao( exercicios, dicionario );
 
 	nomesaida = ConstroiNome( argv[2] );
 	
-	printf(">Procura caminhos: \n");
 	encontracaminhos( dicionario, exercicios, nomesaida );
 
-	printf(">Fim \n");
 	Freedoom(dicionario, exercicios);
 
 	return 0;
