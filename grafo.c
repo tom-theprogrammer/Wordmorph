@@ -1,15 +1,19 @@
 #include "estrt_const_bibliot.h"
 #include "prototipos.h"
 
+
+
 void cria_todos_grafos(t_lista * dicionario,short nmutmax[] ){
     t_lista * iterador = NULL;
     payload_dicionario * payld = NULL;
-    short i = 0;
 
-    for(iterador=dicionario, i =0 ;iterador != NULL; iterador = getProxElementoLista(iterador),i++){
+    for( iterador=dicionario ;iterador != NULL; iterador = getProxElementoLista(iterador) ){
         payld = getItemLista(iterador);
-        cria_grafo(payld, nmutmax[payld->num_char]);
+        printf("tamanho das palavras deste grafo: %d\n",(int)payld->num_char);
+        printf("num max mut teste grafo: %d", (int)nmutmax[payld->num_char-1]);        
+        cria_grafo(payld, nmutmax[payld->num_char-1]);
     }
+
 }
 
 
@@ -29,7 +33,7 @@ void cria_grafo( payload_dicionario * payld, short nmutmax ) {
 
     for( counter1 = 0; counter1 < payld->num_palavras; counter1++) {
 
-        for( counter2 = counter1+1; counter2< payld->num_palavras; counter2++) {
+        for( counter2 = counter1+1; counter2 < payld->num_palavras; counter2++) {
 
             diff = comparer2(payld->palavras[counter1], payld->palavras[counter2], nmutmax);
             if(diff > nmutmax) continue;
@@ -44,10 +48,18 @@ void cria_grafo( payload_dicionario * payld, short nmutmax ) {
             aux->v_adj=counter1;
             aux->peso=diff*diff;
             aux->prox=adj2[counter2];
-            adj2[counter1]= aux;
+            adj2[counter2]= aux;
 
         }
 
+    }
+
+    for( counter1 = 0; counter1 < payld->num_palavras; counter1++){
+        printf(">>>NÓ: %d --->     ",counter1);
+        for(aux = adj2[counter1];aux != NULL;aux=aux->prox) {
+            printf("%d--",aux->v_adj);
+        }
+        printf("\n");
     }
 
 }
@@ -66,9 +78,9 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
     t_lista * it_ex = exercicios, * it_dic = NULL;
     payload_exercicios * payld_ex = NULL;
     payload_dicionario * payld_dic = NULL;
-    int * st;
+    short * st = NULL, * wt = NULL, temp;
     int i;
-	/*FILE* fp = AbreFicheiro(nomeficheiro, "w");*/
+	FILE* fp = AbreFicheiro(nomeficheiro, "w");
 
     for(; it_ex != NULL; it_ex = getProxElementoLista(it_ex) ) {
         payld_ex = (payload_exercicios *)getItemLista( it_ex );
@@ -79,31 +91,48 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
                 break;
         }
 
-        printf("Iniciar Dijkstra \n");
-        st = dijkstra( payld_ex->pos_inicial, payld_ex->pos_final, payld_dic->adj, payld_dic->num_palavras, payld_ex->max_mutacoes );
-		printf("Dijkstra terminado \n");
+        dijkstra( payld_ex->pos_inicial, payld_ex->pos_final, payld_dic->adj, payld_dic->num_palavras, payld_ex->max_mutacoes , &st, &wt);
 
-        for(i=0;i<10;i++){
-            printf("%d=%d\n",i,st[i]);
+                
+        for(i=0;i<payld_dic->num_palavras;i++){
+            printf("%d=%d -- %s \n",i, st[i], payld_dic->palavras[i]);
         }
-        for(i=payld_ex->pos_inicial;i != payld_ex->pos_final; i = st[i]){
+
+
+        fprintf(fp, "%s %d\n", payld_dic->palavras[payld_ex->pos_inicial] , (int) wt[ payld_ex->pos_final ] );
+        printcaminho(fp, st, payld_ex->pos_final, payld_dic->palavras);
+
+        /*for(i=payld_ex->pos_final; i != payld_ex->pos_inicial; i = st[i]){
+            printf("i= %d\n",i);
+            printf("next_i= %d\n",st[i]);
             printf("%d - %s \n",i, payld_dic->palavras[i]);
-        }
+        }*/
 	}
 
-	/*fclose(fp);*/
+	fclose(fp);
 }
 
 
-/* http://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/  */
-int* dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut ){
+void printcaminho(FILE*fp, short* st, int n, char** palavras) {
+    
+    if( st [ st[n] ] != -1 )
+        printcaminho(fp, st, st[n], palavras);
+
+    fprintf(fp,"%s\n", palavras[n]);
+
+}
+
+
+
+
+void dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, short ** _st, short ** _wt ){
     int prio, v;
-    int *st=NULL, *wt=NULL;
+    short *st=NULL, *wt=NULL;
 	FilaP * fp = NULL;
     int item;
     lista_adjs * iterador = NULL;
-	st = (int *) malloc( sizeof(int) * num_v);
-	wt = (int *) malloc( sizeof(int) * num_v);
+	st = (short *) malloc( sizeof(short) * num_v);
+	wt = (short *) malloc( sizeof(short) * num_v);
 
     fp =FPriorIni(num_v);
 
@@ -117,19 +146,23 @@ int* dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut 
 
     printf("Iniciar algoritmo \n");
     while( fp->free != 0 ) {
-        prio = FRemove(fp,wt);
-        printf("%d retirado da lista de prioridade: \n",prio);
-        printf("peso(%d)=%d\n",prio,wt[prio]);
-        for(iterador = lista[prio]; iterador != NULL; iterador = iterador->prox){
-            printf("distancia=%d\n",(int)iterador->peso);
-            printf("%d\n",wt[iterador->v_adj]);
-             if(wt[prio] + (int)iterador->peso < wt[iterador->v_adj]){
-                 wt[iterador->v_adj] = wt[prio] + iterador->peso;
-                 FixUp(fp->queue,iterador->v_adj,wt);
-                 st[iterador->v_adj]=prio;  /*Not sure*/
-             }
+        if( wt[prio = FRemove(fp,wt)] != INFINITE ){
+            
+            for(iterador = lista[prio]; iterador != NULL; iterador = iterador->prox){
+                 
+                 if(iterador->peso > max_mut*max_mut)break;
+                 
+                 if( wt[iterador->v_adj] > wt[prio] + (int)iterador->peso ){
+                     printf("--    ");
+                     wt[iterador->v_adj] = wt[prio] + iterador->peso;
+                     /*FixDown(fp->queue,iterador->v_adj, fp->free -1 ,wt );*/                     
+                     FixUp(fp->queue,iterador->v_adj,wt);
+                     st[iterador->v_adj]=prio;  
+                 }
+            }
         }
-
     }
-    return st;
+
+    *_st = st;
+    *_wt = wt;
 }

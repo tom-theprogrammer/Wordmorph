@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
 
 	dicionario = AlocaDicionario(AbreFicheiro(argv[1],"r"),numchars);
 
+
 	PreencheDicionario(AbreFicheiro(argv[1],"r"), dicionario, numchars);
 
 	ArrumaDicionario(dicionario);
@@ -30,11 +31,10 @@ int main(int argc, char *argv[])
 	printf(">Iniciar construção de grafos: \n");
 	cria_todos_grafos(dicionario,nmutmax);
 
-	printf(">Iniciar construção de grafos: \n");
 	encontraposicao( exercicios, dicionario );
 
-	/*nomesaida = ficheiroout( argv[2] );*/
-
+	nomesaida = ConstroiNome( argv[2] );
+	
 	printf(">Procura caminhos: \n");
 	encontracaminhos( dicionario, exercicios, nomesaida );
 

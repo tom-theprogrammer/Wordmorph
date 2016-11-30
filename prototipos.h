@@ -33,10 +33,14 @@ void quicksort(Item a[], int l, int r);
 int partition(Item a[], int l, int r);
 
 /*grafo.c*/
+void cria_todos_grafos(t_lista * dicionario,short nmutmax[] );
 void cria_grafo( payload_dicionario * payld, short nmutmax );
 int comparer2( char * p1, char* p2, short n);
-void cria_todos_grafos(t_lista * dicionario,short nmutmax[] );
-int* dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut );
+void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomeficheiro );
+void printcaminho(FILE*fp, short* st, int n, char** palavras);
+void dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, short ** _st, short ** _wt );
+
+
 
 /*fila_prioritaria.c*/
 FilaP * FPriorIni(int);		    /*Aloca e inicializa uma fila prioritaria*/
@@ -44,5 +48,7 @@ void FInsere(FilaP * fp, int item, int weight[]);
 int FRemove(FilaP * fp,int weight[]);
 void FixUp(int queue[] , int idx, int weight[] );
 void FixDown( int queue[], int idx, int n, int weight[] );
+
+
 
 #endif

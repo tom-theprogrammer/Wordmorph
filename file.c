@@ -170,9 +170,9 @@ void EscreveFicheiro(char* nome, t_lista * exercicios, t_lista * dicionario){
 
 
 char* ConstroiNome ( char*  nomeantigo ) {
-    char*  ficheirooutput = (char*) malloc( sizeof(char) * ( strlen(nomeantigo) +2 ) );
+    char*  ficheirooutput = (char*) malloc( sizeof(char) * ( strlen(nomeantigo) + 2 ) );
     strcpy(ficheirooutput, nomeantigo);
-    strcpy(ficheirooutput + (strlen(nomeantigo) - 3) , "stat" );
+    strcpy(ficheirooutput + (strlen(nomeantigo) - 1) , "th" );
     return ficheirooutput;
 }
 
