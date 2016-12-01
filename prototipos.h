@@ -37,8 +37,8 @@ void cria_todos_grafos(t_lista * dicionario,short nmutmax[] );
 void cria_grafo( payload_dicionario * payld, short nmutmax );
 int comparer2( char * p1, char* p2, short n);
 void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomeficheiro );
-void printcaminho(FILE*fp, short* st, int n, char** palavras);
-void dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, int ** _st, int ** _wt );
+void printcaminho(FILE*fp, int* st, int n, char** palavras);
+int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, int ** _st, int ** _wt );
 
 
 
