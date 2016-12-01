@@ -23,17 +23,24 @@ int main(int argc, char *argv[])
 
 	dicionario = AlocaDicionario(AbreFicheiro(argv[1],"r"),numchars);
 
-
 	PreencheDicionario(AbreFicheiro(argv[1],"r"), dicionario, numchars);
 
 	ArrumaDicionario(dicionario);
+
+	/* debugging
+	int i;
+	payload_dicionario * p = getItemLista(dicionario);
+	for(i = 0; i< p->num_palavras; i++ ) {
+		printf("%s-", p->palavras[i] );
+	}
+	*/
 
 	cria_todos_grafos(dicionario,nmutmax);
 
 	encontraposicao( exercicios, dicionario );
 
 	nomesaida = ConstroiNome( argv[2] );
-	
+
 	encontracaminhos( dicionario, exercicios, nomesaida );
 
 	Freedoom(dicionario, exercicios);

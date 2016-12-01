@@ -8,7 +8,7 @@ void cria_todos_grafos(t_lista * dicionario,short nmutmax[] ){
     payload_dicionario * payld = NULL;
 
     for( iterador=dicionario ;iterador != NULL; iterador = getProxElementoLista(iterador) ){
-        payld = getItemLista(iterador);   
+        payld = getItemLista(iterador);
         cria_grafo(payld, nmutmax[payld->num_char-1]);
     }
 
@@ -52,7 +52,7 @@ void cria_grafo( payload_dicionario * payld, short nmutmax ) {
 
     }
 
-    /*
+    /* debugging code */
     for( counter1 = 0; counter1 < payld->num_palavras; counter1++){
         printf(">>>NÓ: %d --->     ",counter1);
         for(aux = adj2[counter1];aux != NULL;aux=aux->prox) {
@@ -60,7 +60,7 @@ void cria_grafo( payload_dicionario * payld, short nmutmax ) {
         }
         printf("\n");
     }
-    */
+
 
 }
 
@@ -78,9 +78,11 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
     t_lista * it_ex = exercicios, * it_dic = NULL;
     payload_exercicios * payld_ex = NULL;
     payload_dicionario * payld_dic = NULL;
-    short * st = NULL, * wt = NULL, temp;
+    int * st = NULL, * wt = NULL, temp;
     int i;
 	FILE* fp = AbreFicheiro(nomeficheiro, "w");
+
+    fprintf(fp, "hi\n" );
 
     for(; it_ex != NULL; it_ex = getProxElementoLista(it_ex) ) {
         payld_ex = (payload_exercicios *)getItemLista( it_ex );
@@ -93,15 +95,27 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 
         dijkstra( payld_ex->pos_inicial, payld_ex->pos_final, payld_dic->adj, payld_dic->num_palavras, payld_ex->max_mutacoes , &st, &wt);
 
-        /*        
+
+        /*
         for(i=0;i<payld_dic->num_palavras;i++){
             printf("%d=%d -- %s \n",i, st[i], payld_dic->palavras[i]);
         }
         */
 
-        /*fprintf(fp, "%s %d\n", payld_dic->palavras[payld_ex->pos_inicial] , (int) wt[ payld_ex->pos_final ] );
-        printcaminho(fp, st, payld_ex->pos_final, payld_dic->palavras);*/
+        /*
+        fprintf(fp, "%s %d\n", payld_dic->palavras[payld_ex->pos_inicial] , (int) wt[ payld_ex->pos_final ] );
+        printcaminho(fp, st, payld_ex->pos_final, payld_dic->palavras);
+        */
+        short i;
+        printf("%s\n", payld_dic->palavras[payld_ex->pos_final]);
+        for( i=st[payld_ex->pos_final] ; st[i] != -1 ; i = st[i])
+            printf("%d - %s\n",(int)i, payld_dic->palavras[i]);
 
+        /* printf("%s\n", payld_dic->palavras[st[i]); */
+
+        fprintf(fp, "\n" );
+        free(st);
+        free(wt);
 
 	}
 
@@ -110,7 +124,7 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 
 
 void printcaminho(FILE*fp, short* st, int n, char** palavras) {
-    
+
     if( st [ st[n] ] != -1 )
         printcaminho(fp, st, st[n], palavras);
 
@@ -121,16 +135,17 @@ void printcaminho(FILE*fp, short* st, int n, char** palavras) {
 
 
 
-void dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, short ** _st, short ** _wt ){
+void dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, int ** _st, int ** _wt ){
     int prio, v;
-    short *st=NULL, *wt=NULL;
+    int *st=NULL, *wt=NULL;
 	FilaP * fp = NULL;
     int item;
     lista_adjs * iterador = NULL;
-	st = (short *) malloc( sizeof(short) * num_v);
-	wt = (short *) malloc( sizeof(short) * num_v);
+	st = (int *) malloc( sizeof(int) * num_v);
+	wt = (int *) malloc( sizeof(int) * num_v);
 
     fp =FPriorIni(num_v);
+
 
     for( v = 0; v < num_v-1; v ++ ){
 		st[v] = -1;
@@ -141,17 +156,18 @@ void dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut,
 
     while( fp->free != 0 ) {
         if( wt[prio = FRemove(fp,wt)] != INFINITE ){
-            
             for(iterador = lista[prio]; iterador != NULL; iterador = iterador->prox){
-                 
-                 if(iterador->peso > max_mut*max_mut)break;
-                 
-                 if( wt[iterador->v_adj] > wt[prio] + (int)iterador->peso ){
-                     wt[iterador->v_adj] = wt[prio] + iterador->peso;
-                     /*FixDown(fp->queue,iterador->v_adj, fp->free -1 ,wt );*/                     
-                     FixUp(fp->queue,iterador->v_adj,wt);
-                     st[iterador->v_adj]=prio;  
-                 }
+
+                if(iterador->peso > max_mut*max_mut)continue;
+
+                if( wt[iterador->v_adj] > (int)wt[prio] + (int)iterador->peso ){
+                    wt[iterador->v_adj] = (int)wt[prio] + (int)iterador->peso;
+                    /*FixDown(fp->queue,iterador->v_adj, fp->free -1 ,wt );*/
+                    FixUp(fp->queue,iterador->v_adj,wt);
+                    /*printf("%d\n",prio );*/
+                    st[iterador->v_adj]=prio;
+                    if(iterador->v_adj ==fini ) {printf("Encontrou-se o fim!!!\n" );}
+                }
             }
         }
     }

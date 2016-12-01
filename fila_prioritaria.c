@@ -13,7 +13,7 @@ FilaP * FPriorIni(int size){
 
 
 
-void FInsere(FilaP * fp, int item, short weight[]){
+void FInsere(FilaP * fp, int item, int weight[]){
     if(fp->free +1 < fp->size ){
         fp->queue[fp->free] = item;
         FixUp(fp->queue,fp->free,weight);
@@ -27,7 +27,7 @@ void FInsere(FilaP * fp, int item, short weight[]){
 
 
 
-int FRemove(FilaP * fp,short weight[]){
+int FRemove(FilaP * fp,int weight[]){
     int aux;
 
     /* executar a troca */
@@ -35,7 +35,7 @@ int FRemove(FilaP * fp,short weight[]){
     fp->queue[0] = fp->queue[fp->free -1];
 
     /* fazer fixdown do trocado */
-    fp->free--; 
+    fp->free--;
 
     FixDown(fp->queue,0,fp->free, weight);
 
@@ -48,7 +48,7 @@ int FRemove(FilaP * fp,short weight[]){
 
 
 
-void FixUp(int queue[] , int idx, short weight[] ){
+void FixUp(int queue[] , int idx, int weight[] ){
     int aux;
     while( (idx > 0) && ( weight[ queue[(idx-1)/2] ] > weight[ queue [idx] ]) ){
         aux = queue[(idx-1)/2];
@@ -63,7 +63,7 @@ void FixUp(int queue[] , int idx, short weight[] ){
  * idx é a posição na tabela do nó que queremos acertar
  * n é a primeira posição não ocupada
  */
-void FixDown( int queue[], int idx, int n, short weight[] ){
+void FixDown( int queue[], int idx, int n, int weight[] ){
     int child;
     int aux;
 

@@ -38,16 +38,16 @@ void cria_grafo( payload_dicionario * payld, short nmutmax );
 int comparer2( char * p1, char* p2, short n);
 void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomeficheiro );
 void printcaminho(FILE*fp, short* st, int n, char** palavras);
-void dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, short ** _st, short ** _wt );
+void dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, int ** _st, int ** _wt );
 
 
 
 /*fila_prioritaria.c*/
 FilaP * FPriorIni(int);		    /*Aloca e inicializa uma fila prioritaria*/
-void FInsere(FilaP * fp, int item, short weight[]);
-int FRemove(FilaP * fp,short weight[]);
-void FixUp(int queue[] , int idx, short weight[] );
-void FixDown( int queue[], int idx, int n, short weight[] );
+void FInsere(FilaP * fp, int item, int weight[]);
+int FRemove(FilaP * fp, int weight[]);
+void FixUp(int queue[] , int idx, int weight[] );
+void FixDown( int queue[], int idx, int n, int weight[] );
 
 
 
