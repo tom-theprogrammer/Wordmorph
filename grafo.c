@@ -98,17 +98,14 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 
 
         if( sucesso == 1 ) {
-
             fprintf(fp, "%s %d\n", payld_dic->palavras[payld_ex->pos_inicial] , (int) wt[ payld_ex->pos_final ] );
             printcaminho(fp, st, payld_ex->pos_final, payld_dic->palavras);
-            
-            printf("%s\n", payld_dic->palavras[payld_ex->pos_final]);
-            for( i=st[payld_ex->pos_final] ; st[i] != -1 ; i = st[i])
-                printf("%d - %s\n",(int)i, payld_dic->palavras[i]);
         } 
 		else {
 			fprintf(fp, "%s -1\n", payld_dic->palavras[ payld_ex->pos_inicial] );
 			fprintf(fp, "%s\n", payld_dic->palavras[payld_ex->pos_final]);
+			fprintf(fp, "hi");
+            
 		}
 
 
