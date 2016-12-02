@@ -18,8 +18,8 @@ void freepldicionario( Item aaa ) {
 
 void free_exercicios( Item aaa ) {
     payload_exercicios * payl = (payload_exercicios * ) aaa;
-    free(payl->palavra_inicial);
-    free(payl->palavra_final);
+    /*free(payl->palavra_inicial);*/
+    /*free(payl->palavra_final);*/
     free(payl);
 }
 

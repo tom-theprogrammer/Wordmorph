@@ -22,7 +22,7 @@ typedef struct {
 	char * palavra_inicial;
 	char * palavra_final;
 	int pos_inicial; 		/* posicao da palavra inicial no dicionario */
-	int pos_final; 			/* posicao da palavra fial no dicionario */
+	int pos_final; 			/* posicao da palavra final no dicionario */
 }payload_exercicios;		/*Lista que vai conter ponteiros para todos os caminhos*/
 
 typedef struct _lista_adjs {

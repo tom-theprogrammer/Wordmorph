@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     	exit ( 0 );
   	}
 
+
 	dicionario=iniLista();
 
 	exercicios = ProcuraExercicios(AbreFicheiro(argv[2],"r"),numchars, nmutmax);
@@ -38,6 +39,17 @@ int main(int argc, char *argv[])
 	cria_todos_grafos(dicionario,nmutmax);
 
 	encontraposicao( exercicios, dicionario );
+
+	/* debugging 
+	payload_exercicios * payld_ex;t_lista*iterador;
+	for(iterador = exercicios ; iterador != NULL; iterador = getProxElementoLista(iterador)) {
+		payld_ex = getItemLista(iterador);
+		printf("Inicial: %d\n", payld_ex->pos_inicial);
+		printf("Final: %d\n", payld_ex->pos_final );
+		printf("numchar: %d\n", payld_ex->num_char );	
+	}
+	*/
+
 
 	nomesaida = ConstroiNome( argv[2] );
 

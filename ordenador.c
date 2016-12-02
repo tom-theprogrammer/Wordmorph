@@ -69,9 +69,10 @@ void encontraposicao( t_lista * exercicios, t_lista * dicionariocabeca ) {
         }
         posicaostart = binarysearch(payloaddicionario->palavras,0,payloaddicionario->num_palavras-1,payloadexercicios->palavra_inicial,stringcompare);
         payloadexercicios->pos_inicial = posicaostart;
-        if ( payloadexercicios->max_mutacoes == 1 ) continue;
         posicaolast = binarysearch(payloaddicionario->palavras,0,payloaddicionario->num_palavras-1,payloadexercicios->palavra_final,stringcompare);
         payloadexercicios->pos_final = posicaolast;
+        free(payloadexercicios->palavra_inicial);
+        free(payloadexercicios->palavra_final);
     }
 }
 
