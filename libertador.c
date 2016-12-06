@@ -9,6 +9,10 @@ void freepldicionario( Item aaa ) {
     for(i = 0; i<payloaddicionario->num_palavras; i++) {
         free(payloaddicionario->palavras[i]);
         free(payloaddicionario->adj[i]);
+
+        for(iterador=payloaddicionario->adj[i]; payloaddicionario->adj[i]!=NULL; payloaddicionario->adj[i]=payloaddicionario->adj[i]->prox )
+            free(iterador);
+
     }
     free(payloaddicionario->palavras);
     free(payloaddicionario->adj);
