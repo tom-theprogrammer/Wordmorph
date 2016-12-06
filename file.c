@@ -45,7 +45,7 @@ char* LePalavra( FILE * f ) {
   if (!strcmp(temp, "\0"))
     return NULL;
 
-  pal = (char*) malloc(strlen(temp) + 1);
+  pal = (char*) x_malloc(strlen(temp) + 1);
   if(pal != NULL)
     strcpy(pal,temp);
 
@@ -91,8 +91,8 @@ t_lista * AlocaDicionario (FILE * f,short numchars[MAX_STR]){
 
 	for(i=0;i<MAX_STR;i++){
 		if(ocorrencias[i]==0 || numchars[i]==0) continue;
-        payloaddicionario = (payload_dicionario * ) malloc ( sizeof(payload_dicionario) );
-        payloaddicionario->palavras =  (char ** ) malloc ( sizeof(char*) * ocorrencias[i] );
+        payloaddicionario = (payload_dicionario * ) x_malloc ( sizeof(payload_dicionario) );
+        payloaddicionario->palavras =  (char ** ) x_malloc ( sizeof(char*) * ocorrencias[i] );
         payloaddicionario->num_palavras = ocorrencias[i];
         payloaddicionario->num_char = i+1;
         cabeca = criaNovoNoLista ( cabeca, (Item) payloaddicionario,&erro);
@@ -170,7 +170,7 @@ void EscreveFicheiro(char* nome, t_lista * exercicios, t_lista * dicionario){
 
 
 char* ConstroiNome ( char*  nomeantigo ) {
-    char*  ficheirooutput = (char*) malloc( sizeof(char) * ( strlen(nomeantigo) + 2 ) );
+    char*  ficheirooutput = (char*) x_malloc( sizeof(char) * ( strlen(nomeantigo) + 2 ) );
     strcpy(ficheirooutput, nomeantigo);
     strcpy(ficheirooutput + (strlen(nomeantigo) - 1) , "th" );
     return ficheirooutput;
@@ -188,7 +188,7 @@ t_lista * ProcuraExercicios(FILE* ficheiro, short numchars[MAX_STR], short nummu
 
   while( LeParametros(ficheiro, &inicial, &final, &n_mutacoes) == 3 ){
     if(n_mutacoes > nummutmax[strlen(inicial)-1]) nummutmax[strlen(inicial)-1] = n_mutacoes;
-    exercicio = (payload_exercicios*) malloc(sizeof(payload_exercicios));
+    exercicio = (payload_exercicios*) x_malloc(sizeof(payload_exercicios));
   	exercicio->palavra_inicial = inicial;
   	exercicio->palavra_final = final;
   	exercicio->max_mutacoes = n_mutacoes;

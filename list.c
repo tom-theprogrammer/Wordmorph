@@ -18,6 +18,8 @@
 */
 
 #include "list.h"
+#include "prototipos.h"
+
 
 
 /* Linked list  */
@@ -59,7 +61,7 @@ t_lista  *iniLista(void) {
 t_lista  *criaNovoNoLista (t_lista* lp, Item this, int *err) {
   t_lista *novoNo;
 
-  novoNo = (t_lista*) malloc(sizeof(t_lista));
+  novoNo = (t_lista*) x_malloc(sizeof(t_lista));
   if(novoNo!=NULL) {
 
     novoNo->this = this;

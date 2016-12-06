@@ -20,6 +20,7 @@ void    EscreveFicheiro(char* nome, t_lista * exercicios, t_lista * dicionario);
 void Freedoom ( t_lista* dicionario, t_lista * caminhos);
 void freepldicionario( Item  aaa );
 void free_exercicios( Item  aaa );
+void * x_malloc(size_t size);
 
 /* ordenador.c */
 void ArrumaDicionario(t_lista * dicionario);

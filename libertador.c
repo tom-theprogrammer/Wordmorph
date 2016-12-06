@@ -35,3 +35,11 @@ void Freedoom ( t_lista * dicionario, t_lista * exercicios) {
     libertaLista(exercicios, free_exercicios);
 }
 
+void * x_malloc(size_t size){
+    void * p = NULL;
+    p = malloc(size);
+    if(p==NULL) 
+        exit(0);
+    return p;
+}
+

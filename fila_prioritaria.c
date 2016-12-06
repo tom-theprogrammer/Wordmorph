@@ -3,8 +3,8 @@
 
 
 FilaP * FPriorIni(int size){
-    FilaP * fp = (FilaP *)malloc(sizeof(FilaP));
-    fp->queue = (int *)malloc(sizeof(int)*size);
+    FilaP * fp = (FilaP *)x_malloc(sizeof(FilaP));
+    fp->queue = (int *)x_malloc(sizeof(int)*size);
     fp->size = size;
     fp->free = 0;
     return fp;

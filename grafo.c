@@ -22,7 +22,7 @@ void cria_grafo( payload_dicionario * payld, short nmutmax ) {
 	lista_adjs ** adj2 = NULL;
 	lista_adjs * aux  = NULL;
 
-	payld->adj = (lista_adjs **) malloc( sizeof(lista_adjs*) * payld->num_palavras );
+	payld->adj = (lista_adjs **) x_malloc( sizeof(lista_adjs*) * payld->num_palavras );
 	adj2 = payld->adj;
 
 	for( counter1=0; counter1<payld->num_palavras; counter1++ ){
@@ -36,13 +36,13 @@ void cria_grafo( payload_dicionario * payld, short nmutmax ) {
 			diff = comparer2(payld->palavras[counter1], payld->palavras[counter2], nmutmax);
 			if(diff > nmutmax) continue;
 
-			aux= (lista_adjs *) malloc( sizeof(lista_adjs) );
+			aux= (lista_adjs *) x_malloc( sizeof(lista_adjs) );
 			aux->v_adj=counter2;
 			aux->peso=diff*diff;
 			aux->prox=adj2[counter1];
 			adj2[counter1]= aux;
 
-			aux= (lista_adjs *) malloc( sizeof(lista_adjs) );
+			aux= (lista_adjs *) x_malloc( sizeof(lista_adjs) );
 			aux->v_adj=counter1;
 			aux->peso=diff*diff;
 			aux->prox=adj2[counter2];
@@ -109,7 +109,6 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 		else {
 			fprintf(fp, "%s -1\n", payld_dic->palavras[ payld_ex->pos_inicial] );
 			fprintf(fp, "%s\n", payld_dic->palavras[payld_ex->pos_final]);
-			fprintf(fp, "hi");
 		}
 
 		fprintf(fp, "\n" );
@@ -140,18 +139,17 @@ void printcaminho(FILE*fp, int* st, int n, char** palavras) {
 
 
 int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, int ** _st, int ** _wt ){
-	int prio, v, sucesso=0;
+	int prio=0, v=0, sucesso=0, item=0;
 	int *st=NULL, *wt=NULL;
 	FilaP * fp = NULL;
-	int item;
 	lista_adjs * iterador = NULL;
-	st = (int *) malloc( sizeof(int) * num_v);
-	wt = (int *) malloc( sizeof(int) * num_v);
+	st = (int *) x_malloc( sizeof(int) * num_v);
+	wt = (int *) x_malloc( sizeof(int) * num_v);
 
 	fp =FPriorIni(num_v);
 
 
-	for( v = 0; v < num_v-1; v ++ ){
+	for( v = 0; v < num_v - 1; v ++ ){
 		st[v] = -1;
 		wt[v] = INFINITE;
 		if(v == ini) {wt[v]=0;}
@@ -168,7 +166,7 @@ int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, 
 					wt[iterador->v_adj] = (int)wt[prio] + (int)iterador->peso;
 					FixUp(fp->queue,iterador->v_adj,wt);
 					st[iterador->v_adj]=prio;
-					if(iterador->v_adj ==fini ) {sucesso=1;break;}
+					if(iterador->v_adj == fini ) {sucesso=1;break;}
 				}
 			}
 		}
