@@ -112,9 +112,6 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 			fprintf(fp, "hi");
 		}
 
-
-
-
 		fprintf(fp, "\n" );
 		free(st);
 		free(wt);
@@ -180,6 +177,7 @@ int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, 
 	*_st = st;
 	*_wt = wt;
 
+	FPfree(fp);
 	return sucesso;
 
 }

@@ -48,7 +48,7 @@ void   FInsere(FilaP * fp, int item, int weight[]);			/*Insere um elemento na fi
 int    FRemove(FilaP * fp, int weight[]);				    /*Remove um elemento da fila prioritária*/
 void   FixUp(int queue[] , int idx, int weight[] );			/*Ajusta a localização de um elemento cuja prioridade foi aumentada*/
 void   FixDown( int queue[], int idx, int n, int weight[] );/*Ajusta a localização de um elemento cuja prioridade foi diminuida>*/
-
+void   FPfree(FilaP *  fp);                                   /*Liberta memoria alocada para o uso da lista prioritária*/
 
 
 #endif

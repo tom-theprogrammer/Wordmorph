@@ -84,3 +84,8 @@ void FixDown( int queue[], int idx, int n, int weight[] ){
         idx = child;
     }
 }
+
+void FPfree(FilaP *  fp){
+    free(fp->queue);
+    free(fp);
+}
