@@ -1,7 +1,11 @@
 #include "estrt_const_bibliot.h"
 #include "prototipos.h"
 
-
+/*
+	>Se palavras so diferem numa letra nao fazer dikstra
+	>Se a source for a mesma para 2 problemas nao faz dikstra
+	>Usar item no dikstra (??)
+*/
 int main(int argc, char *argv[])
 {
 	t_lista *dicionario, *exercicios;

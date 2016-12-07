@@ -14,7 +14,7 @@ FilaP * FPriorIni(int size){
 
 
 void FInsere(FilaP * fp, int item, int weight[]){
-    if(fp->free +1 < fp->size ){
+    if(fp->free < fp->size ){
         fp->queue[fp->free] = item;
         FixUp(fp->queue,fp->free,weight);
         fp->free++;

@@ -149,7 +149,7 @@ int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, 
 	fp =FPriorIni(num_v);
 
 
-	for( v = 0; v < num_v - 1; v ++ ){
+	for( v = 0; v < num_v ; v ++ ){
 		st[v] = -1;
 		wt[v] = INFINITE;
 		if(v == ini) {wt[v]=0;}
