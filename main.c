@@ -40,9 +40,9 @@ int main(int argc, char *argv[])
 	}
 	*/
 
-	cria_todos_grafos(dicionario,nmutmax);
-
 	encontraposicao( exercicios, dicionario );
+
+	cria_todos_grafos(dicionario,nmutmax);
 
 	/* debugging 
 	payload_exercicios * payld_ex;t_lista*iterador;

@@ -101,11 +101,10 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 
 		sucesso = dijkstra( payld_ex->pos_inicial, payld_ex->pos_final, payld_dic->adj, payld_dic->num_palavras, payld_ex->max_mutacoes , &st, &wt);
 
-
 		if( sucesso == 1 ) {
-			fprintf(fp, "%s %d\n", payld_dic->palavras[payld_ex->pos_inicial] , (int) wt[ payld_ex->pos_final ] );
+			fprintf(fp, "%s %d\n", payld_dic->palavras[payld_ex->pos_inicial] , wt[ payld_ex->pos_final ] );
 			printcaminho(fp, st, payld_ex->pos_final, payld_dic->palavras);
-		} 
+		}
 		else {
 			fprintf(fp, "%s -1\n", payld_dic->palavras[ payld_ex->pos_inicial] );
 			fprintf(fp, "%s\n", payld_dic->palavras[payld_ex->pos_final]);
@@ -157,7 +156,7 @@ int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, 
 	}
 
 	while( fp->free != 0 ) {
-		if( wt[prio = FRemove(fp,wt)] != INFINITE || sucesso  ){
+		if( wt[prio = FRemove(fp,wt)] != INFINITE  ){
 			for(iterador = lista[prio]; iterador != NULL; iterador = iterador->prox){
 
 				if(iterador->peso > max_mut*max_mut)continue;
@@ -166,7 +165,7 @@ int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, 
 					wt[iterador->v_adj] = (int)wt[prio] + (int)iterador->peso;
 					FixUp(fp->queue,iterador->v_adj,wt);
 					st[iterador->v_adj]=prio;
-					if(iterador->v_adj == fini ) {sucesso=1;break;}
+					if(iterador->v_adj == fini ) sucesso=1;
 				}
 			}
 		}
