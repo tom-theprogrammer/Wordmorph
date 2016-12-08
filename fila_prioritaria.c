@@ -23,7 +23,14 @@ void FInsere(FilaP * fp, int item, int weight[]){
     printf("A fila prioritaria está cheia, por isso há aqui um prob\n");
 }
 
-
+void FInsereDirec(FilaP * fp, int item) {
+    if(fp->free < fp->size) {
+        fp->queue[fp->free] = item;
+        fp->free++;
+        return;
+    }
+    printf("A fila prioritaria está cheia, por isso há aqui um prob\n");    
+}
 
 
 

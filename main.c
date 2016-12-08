@@ -12,8 +12,6 @@ int main(int argc, char *argv[])
 	short numchars[MAX_STR]={0}, nmutmax[MAX_STR]= {0};
 	char* nomesaida;
 
-	t_lista * tmp = NULL;
-
 	if ( argc < 3 ) {
     	fprintf ( stderr, "ERROR: Usage: %s [filename].dic [filename].pal\n", argv[0] );
     	exit ( 0 );

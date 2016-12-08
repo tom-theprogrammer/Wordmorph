@@ -1,4 +1,4 @@
-hifarmacia 21
+farmacia 21
 farmacos
 fariamos
 feriamos
@@ -7,7 +7,7 @@ gemiamos
 remiamos
 remedios
 
-hifarmacia 22
+farmacia 22
 farmacos
 fariamos
 feriamos
@@ -16,7 +16,7 @@ gemiamos
 remiamos
 remedios
 
-hifarmacia 22
+farmacia 22
 farmacos
 fariamos
 pariamos
@@ -28,13 +28,13 @@ regarmos
 regadios
 remedios
 
-hifarmacia -1
+farmacia -1
 remedios
 
-hiremedios -1
+remedios -1
 farmacia
 
-hiremedios 22
+remedios 22
 remedias
 remirias
 remirmos
@@ -46,7 +46,7 @@ fariamos
 farmacos
 farmacia
 
-hiremedios 21
+remedios 21
 remiamos
 temiamos
 teriamos
@@ -55,7 +55,7 @@ fariamos
 farmacos
 farmacia
 
-hiremedios 21
+remedios 21
 remiamos
 temiamos
 teriamos

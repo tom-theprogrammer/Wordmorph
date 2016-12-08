@@ -69,7 +69,7 @@ void cria_grafo( payload_dicionario * payld, short nmutmax ) {
 /* assumimos que as palavras têm o mesmo comprimento */
 int comparer2( char * p1, char* p2, short n) {
 	int diff=0, i=0;
-	for( i=0; p1[i] != '\0' && diff<=n; i++ )
+	for( i=0; p1[i] != '\0'; i++ )
 		if(p1[i]!=p2[i]) diff++;
 
 	return diff;
@@ -80,7 +80,7 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 	t_lista * it_ex = exercicios, * it_dic = NULL;
 	payload_exercicios * payld_ex = NULL;
 	payload_dicionario * payld_dic = NULL;
-	int * st = NULL, * wt = NULL, temp;
+	int * st = NULL, * wt = NULL;
 	int i, sucesso;
 	FILE* fp = AbreFicheiro(nomeficheiro, "w");
 
@@ -147,19 +147,20 @@ int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, 
 
 	fp =FPriorIni(num_v);
 
-
 	for( v = 0; v < num_v ; v ++ ){
 		st[v] = -1;
-		wt[v] = INFINITE;
-		if(v == ini) {wt[v]=0;}
-		FInsere(fp, v, wt);
+		wt[v] = INFINITE; 
+		FInsereDirec(fp, v);
 	}
+	wt[ini] = 0;
+	FixUp(fp->queue, ini, wt);
+	/* numero de vertices é o numero de palavras no dicionario */
 
 	while( fp->free != 0 ) {
 		if( wt[prio = FRemove(fp,wt)] != INFINITE  ){
 			for(iterador = lista[prio]; iterador != NULL; iterador = iterador->prox){
 
-				if(iterador->peso > max_mut*max_mut)continue;
+				if(iterador->peso > max_mut*max_mut)continue; /* se o peso este adjacente for superior ao estabelecido ignoramos */
 
 				if( wt[iterador->v_adj] > (int)wt[prio] + (int)iterador->peso ){
 					wt[iterador->v_adj] = (int)wt[prio] + (int)iterador->peso;
