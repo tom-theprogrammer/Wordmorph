@@ -31,28 +31,9 @@ int main(int argc, char *argv[])
 
 	ArrumaDicionario(dicionario);
 
-	/* debugging
-	int i;
-	payload_dicionario * p = getItemLista(dicionario);
-	for(i = 0; i< p->num_palavras; i++ ) {
-		printf("%s-", p->palavras[i] );
-	}
-	*/
-
 	encontraposicao( exercicios, dicionario );
 
 	cria_todos_grafos(dicionario,nmutmax);
-
-	/* debugging 
-	payload_exercicios * payld_ex;t_lista*iterador;
-	for(iterador = exercicios ; iterador != NULL; iterador = getProxElementoLista(iterador)) {
-		payld_ex = getItemLista(iterador);
-		printf("Inicial: %d\n", payld_ex->pos_inicial);
-		printf("Final: %d\n", payld_ex->pos_final );
-		printf("numchar: %d\n", payld_ex->num_char );	
-	}
-	*/
-
 
 	nomesaida = ConstroiNome( argv[2] );
 

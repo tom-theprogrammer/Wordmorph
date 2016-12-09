@@ -154,7 +154,6 @@ int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, 
 	}
 	wt[ini] = 0;
 	FixUp(fp->queue, ini, wt);
-	/* numero de vertices é o numero de palavras no dicionario */
 
 	while( fp->free != 0 ) {
 		if( wt[prio = FRemove(fp,wt)] != INFINITE  ){
