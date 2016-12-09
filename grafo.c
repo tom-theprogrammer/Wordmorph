@@ -97,7 +97,7 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 		printf("Inicial: %d - %s\n", payld_ex->pos_inicial, payld_dic->palavras[payld_ex->pos_inicial] );
 		printf("Final: %d - %s\n", payld_ex->pos_final, payld_dic->palavras[payld_ex->pos_final] );
 		printf("numchar: %d\n", payld_ex->num_char );
-		
+
 
 		sucesso = dijkstra( payld_ex->pos_inicial, payld_ex->pos_final, payld_dic->adj, payld_dic->num_palavras, payld_ex->max_mutacoes , &st, &wt);
 
@@ -149,7 +149,7 @@ int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, 
 
 	for( v = 0; v < num_v ; v ++ ){
 		st[v] = -1;
-		wt[v] = INFINITE; 
+		wt[v] = INFINITE;
 		FInsereDirec(fp, v);
 	}
 	wt[ini] = 0;
@@ -164,7 +164,7 @@ int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, 
 
 				if( wt[iterador->v_adj] > (int)wt[prio] + (int)iterador->peso ){
 					wt[iterador->v_adj] = (int)wt[prio] + (int)iterador->peso;
-					FixUp(fp->queue,iterador->v_adj,wt);
+					FixUp(fp->queue,FPDiscover(fp,iterador->v_adj),wt);
 					st[iterador->v_adj]=prio;
 					if(iterador->v_adj == fini ) sucesso=1;
 				}

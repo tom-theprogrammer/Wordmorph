@@ -29,7 +29,7 @@ void FInsereDirec(FilaP * fp, int item) {
         fp->free++;
         return;
     }
-    printf("A fila prioritaria está cheia, por isso há aqui um prob\n");    
+    printf("A fila prioritaria está cheia, por isso há aqui um prob\n");
 }
 
 
@@ -95,4 +95,15 @@ void FixDown( int queue[], int idx, int n, int weight[] ){
 void FPfree(FilaP *  fp){
     free(fp->queue);
     free(fp);
+}
+
+
+
+int FPDiscover(FilaP *fp, int v) {
+  int i;
+  for(i=0;i<fp->free;i++) {
+    if( fp->queue[i] == v ) return i;
+  }
+  printf("Erro crasso\n" );
+  exit(0);
 }
