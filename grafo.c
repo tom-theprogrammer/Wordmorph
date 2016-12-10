@@ -80,7 +80,7 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 	t_lista * it_ex = exercicios, * it_dic = NULL;
 	payload_exercicios * payld_ex = NULL;
 	payload_dicionario * payld_dic = NULL;
-	int * st = NULL, * wt = NULL;
+	unsigned short * st = NULL, * wt = NULL;
 	int i, sucesso, tmp;
 	FILE* fp = AbreFicheiro(nomeficheiro, "w");
 
@@ -126,7 +126,7 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 }
 
 
-void printcaminho(FILE*fp, int* st, int n, char** palavras) {
+void printcaminho(FILE*fp, unsigned short* st, unsigned short n, char** palavras) {
 
 	if( st [ st[n] ] != -1 )
 		printcaminho(fp, st, st[n], palavras);
@@ -142,13 +142,13 @@ void printcaminho(FILE*fp, int* st, int n, char** palavras) {
 
 
 
-int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, int ** _st, int ** _wt ){
+int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, unsigned short ** _st, unsigned short ** _wt ){
 	int prio=0, v=0, sucesso=0, item=0;
-	int *st=NULL, *wt=NULL;
+	unsigned short *st=NULL, *wt=NULL;
 	FilaP * fp = NULL;
 	lista_adjs * iterador = NULL;
-	st = (int *) x_malloc( sizeof(int) * num_v);
-	wt = (int *) x_malloc( sizeof(int) * num_v);
+	st = (unsigned short *) x_malloc( sizeof(unsigned short) * num_v);
+	wt = (unsigned short *) x_malloc( sizeof(unsigned short) * num_v);
 
 	fp =FPriorIni(num_v);
 

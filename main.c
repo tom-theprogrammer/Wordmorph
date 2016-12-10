@@ -39,7 +39,6 @@ int main(int argc, char *argv[])
 
 	encontracaminhos( dicionario, exercicios, nomesaida );
 
-	printf("About to free \n");
 	Freedoom(dicionario, exercicios);
 
 	return 0;
