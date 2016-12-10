@@ -11,7 +11,7 @@ void cria_todos_grafos(t_lista * dicionario,short nmutmax[] ){
 		payld = getItemLista(iterador);
 		cria_grafo(payld, nmutmax[payld->num_char-1]);
 	}
-
+	
 }
 
 
@@ -105,7 +105,6 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 		}
 		else{
 			sucesso = dijkstra( payld_ex->pos_inicial, payld_ex->pos_final, payld_dic->adj, payld_dic->num_palavras, payld_ex->max_mutacoes , &st, &wt);
-
 			if( sucesso == 1 ) {
 				fprintf(fp, "%s %d\n", payld_dic->palavras[payld_ex->pos_inicial] , wt[ payld_ex->pos_final ] );
 				printcaminho(fp, st, payld_ex->pos_final, payld_dic->palavras);
@@ -114,7 +113,6 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 				fprintf(fp, "%s -1\n", payld_dic->palavras[ payld_ex->pos_inicial] );
 				fprintf(fp, "%s\n", payld_dic->palavras[payld_ex->pos_final]);
 			}
-
 			fprintf(fp, "\n" );
 			free(st);
 			free(wt);
@@ -127,8 +125,7 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 
 
 void printcaminho(FILE*fp, unsigned short* st, unsigned short n, char** palavras) {
-
-	if( st [ st[n] ] != -1 )
+	if( st [ st[n] ] != 65535 )
 		printcaminho(fp, st, st[n], palavras);
 
 	fprintf(fp,"%s\n", palavras[n]);
@@ -158,7 +155,7 @@ int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, 
 		FInsereDirec(fp, v);
 	}
 	wt[ini] = 0;
-	FixUp(fp->queue, ini, wt);
+	FixUp(fp, ini, wt);
 
 	while( fp->free != 0 ) {
 		if( wt[prio = FRemove(fp,wt)] != INFINITE  ){
@@ -168,7 +165,7 @@ int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, 
 
 				if( wt[iterador->v_adj] > (int)wt[prio] + (int)iterador->peso ){
 					wt[iterador->v_adj] = (int)wt[prio] + (int)iterador->peso;
-					FixUp(fp->queue,FPDiscover(fp,iterador->v_adj),wt);
+					FixUp(fp,FPDiscover(fp,iterador->v_adj),wt);
 					st[iterador->v_adj]=prio;
 					if(iterador->v_adj == fini ) sucesso=1;
 				}

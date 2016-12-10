@@ -45,11 +45,11 @@ int  dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut,
 
 /*fila_prioritaria.c*/
 FilaP *FPriorIni(int);										/*Aloca e inicializa uma fila prioritaria*/
-void   FInsere(FilaP * fp, int item, int weight[]);			/*Insere um elemento na fila prioritáira*/
+void   FInsere(FilaP * fp, int item, unsigned short weight[]);			/*Insere um elemento na fila prioritáira*/
 void   FInsereDirec(FilaP * fp, int item);                    /*Insere um elemento sem se preocupar com concertar a prioridade */ 
-int    FRemove(FilaP * fp, int weight[]);				    /*Remove um elemento da fila prioritária*/
-void   FixUp(int queue[] , int idx, int weight[] );			/*Ajusta a localização de um elemento cuja prioridade foi aumentada*/
-void   FixDown( int queue[], int idx, int n, int weight[] );/*Ajusta a localização de um elemento cuja prioridade foi diminuida>*/
+int    FRemove(FilaP * fp, unsigned short weight[]);				    /*Remove um elemento da fila prioritária*/
+void   FixUp(FilaP * , int idx, unsigned short weight[] );			/*Ajusta a localização de um elemento cuja prioridade foi aumentada*/
+void   FixDown(FilaP *, int idx, int n, unsigned short weight[] );/*Ajusta a localização de um elemento cuja prioridade foi diminuida>*/
 void   FPfree(FilaP *  fp);                                 /*Liberta memoria alocada para o uso da lista prioritária*/
 int    FPDiscover(FilaP *fp, int v);
 

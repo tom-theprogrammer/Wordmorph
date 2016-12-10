@@ -4,7 +4,7 @@
 
 FilaP * FPriorIni(int size){
     FilaP * fp = (FilaP *)x_malloc(sizeof(FilaP));
-    fp->queue = (int *)x_malloc(sizeof(int)*size);
+    fp->queue = (unsigned short *)x_malloc(sizeof(unsigned short)*size);
     fp->size = size;
     fp->free = 0;
     return fp;
@@ -13,10 +13,10 @@ FilaP * FPriorIni(int size){
 
 
 
-void FInsere(FilaP * fp, int item, int weight[]){
+void FInsere(FilaP * fp, int item, unsigned short weight[]){
     if(fp->free < fp->size ){
         fp->queue[fp->free] = item;
-        FixUp(fp->queue,fp->free,weight);
+        FixUp(fp,fp->free,weight);
         fp->free++;
         return;
     }
@@ -34,7 +34,7 @@ void FInsereDirec(FilaP * fp, int item) {
 
 
 
-int FRemove(FilaP * fp,int weight[]){
+int FRemove(FilaP * fp,unsigned short weight[]){
     int aux;
 
     /* executar a troca */
@@ -44,7 +44,7 @@ int FRemove(FilaP * fp,int weight[]){
     /* fazer fixdown do trocado */
     fp->free--;
 
-    FixDown(fp->queue,0,fp->free, weight);
+    FixDown(fp,0,fp->free, weight);
 
 
     return aux;
@@ -55,12 +55,12 @@ int FRemove(FilaP * fp,int weight[]){
 
 
 
-void FixUp(int queue[] , int idx, int weight[] ){
+void FixUp(FilaP *fp , int idx, unsigned short weight[] ){
     int aux;
-    while( (idx > 0) && ( weight[ queue[(idx-1)/2] ] > weight[ queue [idx] ]) ){
-        aux = queue[(idx-1)/2];
-        queue[(idx-1)/2] = queue[idx];
-        queue[idx] = aux;
+    while( (idx > 0) && ( weight[ fp->queue[(idx-1)/2] ] > weight[ fp->queue [idx] ]) ){
+        aux = fp->queue[(idx-1)/2];
+        fp->queue[(idx-1)/2] = fp->queue[idx];
+        fp->queue[idx] = aux;
         idx=(idx-1)/2;
     }
 }
@@ -70,23 +70,23 @@ void FixUp(int queue[] , int idx, int weight[] ){
  * idx é a posição na tabela do nó que queremos acertar
  * n é a primeira posição não ocupada
  */
-void FixDown( int queue[], int idx, int n, int weight[] ){
+void FixDown( FilaP *fp, int idx, int n, unsigned short weight[] ){
     int child;
     int aux;
 
     while( 2 * idx < n -1){
         /* comparamos os 2 filhos */
         child = 2*idx+1; /* filho 1 */
-        if( (child < n-1) &&  weight[queue[child] ] >  weight[queue[child+1] ] )
+        if( (child < n-1) &&  weight[fp->queue[child] ] >  weight[fp->queue[child+1] ] )
             child++;
 
         /* verificamos se o filho cuja prioridade é maior tem maior prioridade que o pai */
-        if(weight[queue[idx] ] <  weight[queue[child] ])
+        if(weight[fp->queue[idx] ] <  weight[fp->queue[child] ])
             break;
 
-        aux = queue[idx];
-        queue[idx] = queue[child];
-        queue[child] = aux;
+        aux = fp->queue[idx];
+        fp->queue[idx] = fp->queue[child];
+        fp->queue[child] = aux;
 
         idx = child;
     }

@@ -14,7 +14,6 @@ int main(int argc, char *argv[])
 	char* nomesaida;
 
 	if ( argc < 3 ) {
-    	fprintf ( stderr, "ERROR: Usage: %s [filename].dic [filename].pal\n", argv[0] );
     	exit ( 0 );
   	}
 

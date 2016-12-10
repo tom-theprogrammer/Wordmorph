@@ -39,7 +39,7 @@ typedef struct{
 }payload_dicionario;
 
 typedef struct{
-	int *queue;
+	unsigned short *queue;
 	int free;
 	int size;
 }FilaP;
