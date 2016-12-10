@@ -9,7 +9,7 @@ Thomas
     - Relatório
 	Análise Formal
 	Descição das estuturas e tipos de dados
-    - Exemplo
+	Exemplo
 	
 
 Andre
