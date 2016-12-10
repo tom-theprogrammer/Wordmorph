@@ -23,9 +23,9 @@ void ArrumaDicionario(t_lista * dicionario) {
 /******************************************************************************
 * quicksort()
 *
-* Argumentos:a -
-*            l -
-*            r -
+* Argumentos:a - array a ordenar
+*            l - extremo esquerdo do array
+*            r - extremo direito do array
 * Retorna: ---
 * Efeitos-colaterais: ---
 *
@@ -35,20 +35,20 @@ void ArrumaDicionario(t_lista * dicionario) {
 void quicksort(Item a[], int l, int r)
 
 {
-int i;
-if (r <= l) return;
-i = partition(a, l, r);
-quicksort(a, l, i-1);
-quicksort(a, i+1, r);
+    int i;
+    if (r <= l) return;
+    i = partition(a, l, r);
+    quicksort(a, l, i-1);
+    quicksort(a, i+1, r);
 }
 
 
 /******************************************************************************
  * partition()
  *
- * Argumentos:a -
- *            l -
- *            r - 
+ * Argumentos:a - array a ordenar
+ *            l - extremo esquerdo do array
+ *            r - extremo direito do array
  * Retorna: 
  * Efeitos-colaterais: ---
  *
@@ -57,26 +57,26 @@ quicksort(a, i+1, r);
  *****************************************************************************/
 int partition(Item a[], int l, int r)
 {
-int i, j;
-Item v;
-v = a[r]; i = l-1; j = r;
-for (;;) {
-    while (less(a[++i], v)) ;
-    while (less(v, a[--j]))
-    if (j == l) break;
-    if (i >= j) break;
-    exch(a[i], a[j]);
-}
-exch(a[i], a[r]);
-return i;
+    int i, j;
+    Item v;
+    v = a[r]; i = l-1; j = r;
+    for (;;) {
+        while (less(a[++i], v)) ;
+        while (less(v, a[--j]))
+        if (j == l) break;
+        if (i >= j) break;
+        exch(a[i], a[j]);
+    }
+    exch(a[i], a[r]);
+    return i;
 }
 
 
 /******************************************************************************
  * compfunc()
  *
- * Argumentos:a -
- *            b -
+ * Argumentos:a - Ponteiro para um dos items a comparar
+ *            b - Ponteiro para um dos items a comparar
  * Retorna: 
  * Efeitos-colaterais: ---
  *
@@ -87,7 +87,7 @@ int compfunc( const void * a, const void * b ) {
     return stringcompare( (char*) a , (char* )b );
 }
 
-/* assume-se que as palavras têm o mesmo tamanho e são todas de minúsculas */
+
 /******************************************************************************
  * stringcompare()
  *
@@ -98,6 +98,7 @@ int compfunc( const void * a, const void * b ) {
  *
  * Descrição:
  *
+ *  assume-se que as palavras têm o mesmo tamanho e são todas de minúsculas
  *****************************************************************************/
 int stringcompare ( char* a, char* b ) {
     int i;
@@ -146,11 +147,11 @@ void encontraposicao( t_lista * exercicios, t_lista * dicionariocabeca ) {
 /******************************************************************************
  * binarysearch()
  *
- * Argumentos:table -
- *            l - 
- *            r - 
- *            item -
- *            comparer() -
+ * Argumentos:table - array a ordenar
+ *            l - extremo esquerdo do array
+ *            r - extremo direito array
+ *            item - 
+ *            comparer() - Função que compara dois items e retorna qual o maior
  * Retorna: 
  * Efeitos-colaterais: ---
  *

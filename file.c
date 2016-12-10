@@ -91,7 +91,7 @@ int LeParametros(FILE * f, char ** inicial, char ** final, int *quant){
  * Retorna:   Ponteiro para a cabeça da lista que é o dicionario
  * Efeitos-colaterais: ---
  *
- * Descrição: Aloca 
+ * Descrição: 
  *
  *****************************************************************************/
 t_lista * AlocaDicionario (FILE * f,short numchars[MAX_STR]){
