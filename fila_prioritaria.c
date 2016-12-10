@@ -20,7 +20,7 @@ void FInsere(FilaP * fp, int item, int weight[]){
         fp->free++;
         return;
     }
-    printf("A fila prioritaria está cheia, por isso há aqui um prob\n");
+    /*printf("A fila prioritaria está cheia, por isso há aqui um prob\n");*/
 }
 
 void FInsereDirec(FilaP * fp, int item) {
@@ -29,7 +29,7 @@ void FInsereDirec(FilaP * fp, int item) {
         fp->free++;
         return;
     }
-    printf("A fila prioritaria está cheia, por isso há aqui um prob\n");
+    /*printf("A fila prioritaria está cheia, por isso há aqui um prob\n");*/
 }
 
 
@@ -104,6 +104,6 @@ int FPDiscover(FilaP *fp, int v) {
   for(i=0;i<fp->free;i++) {
     if( fp->queue[i] == v ) return i;
   }
-  printf("Erro crasso\n" );
+  /*printf("Erro crasso\n" );*/
   exit(0);
 }

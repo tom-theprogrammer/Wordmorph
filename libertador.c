@@ -24,10 +24,12 @@ void freepldicionario( Item aaa ) {
 }
 
 
+
 void free_exercicios( Item aaa ) {
     payload_exercicios * payl = (payload_exercicios * ) aaa;
     free(payl);
 }
+
 
 
 void Freedoom ( t_lista * dicionario, t_lista * exercicios) {

@@ -81,7 +81,7 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 	payload_exercicios * payld_ex = NULL;
 	payload_dicionario * payld_dic = NULL;
 	int * st = NULL, * wt = NULL;
-	int i, sucesso;
+	int i, sucesso, tmp;
 	FILE* fp = AbreFicheiro(nomeficheiro, "w");
 
 
@@ -93,27 +93,32 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 			if( payld_dic->num_char == payld_ex->num_char )
 				break;
 		}
-
+		/*
 		printf("Inicial: %d - %s\n", payld_ex->pos_inicial, payld_dic->palavras[payld_ex->pos_inicial] );
 		printf("Final: %d - %s\n", payld_ex->pos_final, payld_dic->palavras[payld_ex->pos_final] );
 		printf("numchar: %d\n", payld_ex->num_char );
-
-
-		sucesso = dijkstra( payld_ex->pos_inicial, payld_ex->pos_final, payld_dic->adj, payld_dic->num_palavras, payld_ex->max_mutacoes , &st, &wt);
-
-		if( sucesso == 1 ) {
-			fprintf(fp, "%s %d\n", payld_dic->palavras[payld_ex->pos_inicial] , wt[ payld_ex->pos_final ] );
-			printcaminho(fp, st, payld_ex->pos_final, payld_dic->palavras);
+		*/
+		if( (tmp = comparer2(payld_dic->palavras[ payld_ex->pos_inicial],payld_dic->palavras[ payld_ex->pos_final],payld_ex->max_mutacoes)) <=1 ){
+			/*printf("Shortcut\n");*/
+			fprintf(fp,"%s %d\n",payld_dic->palavras[ payld_ex->pos_inicial],tmp);
+			fprintf(fp,"%s\n\n",payld_dic->palavras[ payld_ex->pos_inicial]);
 		}
-		else {
-			fprintf(fp, "%s -1\n", payld_dic->palavras[ payld_ex->pos_inicial] );
-			fprintf(fp, "%s\n", payld_dic->palavras[payld_ex->pos_final]);
+		else{
+			sucesso = dijkstra( payld_ex->pos_inicial, payld_ex->pos_final, payld_dic->adj, payld_dic->num_palavras, payld_ex->max_mutacoes , &st, &wt);
+
+			if( sucesso == 1 ) {
+				fprintf(fp, "%s %d\n", payld_dic->palavras[payld_ex->pos_inicial] , wt[ payld_ex->pos_final ] );
+				printcaminho(fp, st, payld_ex->pos_final, payld_dic->palavras);
+			}
+			else {
+				fprintf(fp, "%s -1\n", payld_dic->palavras[ payld_ex->pos_inicial] );
+				fprintf(fp, "%s\n", payld_dic->palavras[payld_ex->pos_final]);
+			}
+
+			fprintf(fp, "\n" );
+			free(st);
+			free(wt);
 		}
-
-		fprintf(fp, "\n" );
-		free(st);
-		free(wt);
-
 	}
 
 	free(nomeficheiro);

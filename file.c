@@ -182,12 +182,18 @@ char* ConstroiNome ( char*  nomeantigo ) {
 
 t_lista * ProcuraExercicios(FILE* ficheiro, short numchars[MAX_STR], short nummutmax[MAX_STR]) {
   char *inicial=NULL, *final=NULL;
-  int n_mutacoes=0, erro, tamanho;
+  int n_mutacoes=0, erro, tamanho, tmp;
   payload_exercicios * exercicio;
   t_lista * cabeca = NULL;
 
   while( LeParametros(ficheiro, &inicial, &final, &n_mutacoes) == 3 ){
+
+    if( (tmp = comparer2(inicial,final,n_mutacoes)) < n_mutacoes){
+      n_mutacoes=tmp;
+    }
+
     if(n_mutacoes > nummutmax[strlen(inicial)-1]) nummutmax[strlen(inicial)-1] = n_mutacoes;
+
     exercicio = (payload_exercicios*) x_malloc(sizeof(payload_exercicios));
   	exercicio->palavra_inicial = inicial;
   	exercicio->palavra_final = final;
