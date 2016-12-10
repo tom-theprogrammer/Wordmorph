@@ -2,38 +2,35 @@
 #include "prototipos.h"
 
 
-/******************************************************************************
- * AbreFicheiro()
+
+ /******************************************************************************
+ * AbreFIcheiro()
  *
- * Arguments: nome - pointer to string holding name of file to open
- *            mode - pointer to string holding mode to use for opening file
- * Returns: pointer to opened file
- * Side-Effects: exits if given file cannot be opened with given mode
+ * Argumentos: nome - Nome do ficheiro a abrir
+               mode - Modo de abertura do ficheiro
+ * Retorna: Ponteiro para ficheiro aberto
+ * Efeitos-colaterais: Exit se o ficheiro passado não poder ser aberto
  *
- * Description:
+ * Descrição:
  *
  *****************************************************************************/
 FILE *AbreFicheiro ( char *nome, char *mode ) {
   FILE *f;
   f = fopen ( nome, mode );
-  if ( f == NULL ) {
+  if ( f == NULL ) 
     exit (0);
-    /* Error messages are sent to the stderr channel.
-       Use an exit number different from 0 (zero) in case of error.*/
-  }
   return (f);
 }
-
 
 
 /******************************************************************************
  * LePalavra()
  *
- * Arguments: f - pointer to file where word will be read
- * Returns: pointer to word just read
- * Side-Effects: none
+ * Argumentos:f - Ponteiro para o ficheiro de onde vamos extrair informação
+ * Retorna: Ponteiro para a palavra lida
+ * Efeitos-colaterais: Return NUll se nao conseguir ler a palavra
  *
- * Description:
+ * Descrição:
  *
  *****************************************************************************/
 char* LePalavra( FILE * f ) {
@@ -54,7 +51,20 @@ char* LePalavra( FILE * f ) {
 
 
 
-
+/******************************************************************************
+ * LeParametros()
+ *
+ * Argumentos:f - Ponteiro para o ficheiro de onde vamos extrair informação
+ *            inicial - Ponteiro para a string que vai conter a palavra inicial do problema
+ *            final - Ponteiro para a string que vai conter a palavra final do problema
+ *            quant - Ponteiro para o inteiro que vai conter o número maximo de mutações para o problema
+ * Retorna:   3 se tudo correr como esperado
+              0,1 ou 2 se existir um erro na leitura do ficheiro
+ * Efeitos-colaterais: ---
+ *
+ * Descrição:
+ *
+ *****************************************************************************/
 int LeParametros(FILE * f, char ** inicial, char ** final, int *quant){
   char *strint = NULL;
 
@@ -68,14 +78,22 @@ int LeParametros(FILE * f, char ** inicial, char ** final, int *quant){
   free(strint);
 
   return 3;
-
-  /* fscanf(f, "%s %s %d", inicial, final, quant); */
 }
 
 
 
 
-
+/******************************************************************************
+ * AlocaDicionario()
+ *
+ * Argumentos:f - Ponteiro para o ficheiro de onde vamos extrair informação
+ *            numchars - Array que indica quais a quantidade de palavras por tamanho de palavra 
+ * Retorna:   Ponteiro para a cabeça da lista que é o dicionario
+ * Efeitos-colaterais: ---
+ *
+ * Descrição: Aloca 
+ *
+ *****************************************************************************/
 t_lista * AlocaDicionario (FILE * f,short numchars[MAX_STR]){
 	int ocorrencias[MAX_STR] = {0};
 	char * nova_palavra = NULL;
@@ -84,8 +102,8 @@ t_lista * AlocaDicionario (FILE * f,short numchars[MAX_STR]){
 	payload_dicionario * payloaddicionario = NULL;
 
     while((nova_palavra=LePalavra(f)) != (char *)NULL){
-		ocorrencias[strlen(nova_palavra)-1] +=1;
-		free(nova_palavra);
+		  ocorrencias[strlen(nova_palavra)-1] +=1;
+		  free(nova_palavra);
     }
 
 
@@ -105,7 +123,18 @@ t_lista * AlocaDicionario (FILE * f,short numchars[MAX_STR]){
 
 
 
-
+/******************************************************************************
+ * PreencheDicionario()
+ *
+ * Argumentos:f - Ponteiro para o ficheiro de onde vamos extrair informação
+ *            dicionario - Ponteiro para a lista que contêm o dicionario
+ *            numchars - Array que indica quais a quantidade de palavras por tamanho de palavra
+ * Retorna:  ---
+ * Efeitos-colaterais: ---
+ *
+ * Descrição:
+ *
+ *****************************************************************************/
 void PreencheDicionario(FILE * f, t_lista * dicionario, short numchars[MAX_STR]){
   t_lista * iterador = NULL;
 	int posicoes[MAX_STR] = {0};
@@ -134,7 +163,18 @@ void PreencheDicionario(FILE * f, t_lista * dicionario, short numchars[MAX_STR])
 
 
 
-
+/******************************************************************************
+ * EscreveFicheiro()
+ *
+ * Argumentos:nome - Nome do ficheiro de entrada que nos premitira descobrir o nome do de saída
+ *            exercicios - Ponteiro para a lista que contêm os Problemas a resolver
+ *            dicionario - Ponteiro para a lista que contêm o dicionario
+ * Retorna: ---
+ * Efeitos-colaterais: ---
+ *
+ * Descrição:
+ *
+ *****************************************************************************/
 void EscreveFicheiro(char* nome, t_lista * exercicios, t_lista * dicionario){
     char* ficheirooutput = ConstroiNome(nome);
     FILE * f = AbreFicheiro(ficheirooutput,"w");
@@ -168,8 +208,17 @@ void EscreveFicheiro(char* nome, t_lista * exercicios, t_lista * dicionario){
 }
 
 
-
-char* ConstroiNome ( char*  nomeantigo ) {
+/******************************************************************************
+ * ConstroiNome()
+ *
+ * Argumentos:nomeantigo - Nome do ficheiro de entrada
+ * Retorna:   Ponteiro para a string que contêm o nome do ficheiro de escrita
+ * Efeitos-colaterais: ---
+ *
+ * Descrição:
+ *
+ *****************************************************************************/
+char* ConstroiNome( char*  nomeantigo ) {
     char*  ficheirooutput = (char*) x_malloc( sizeof(char) * ( strlen(nomeantigo) + 2 ) );
     strcpy(ficheirooutput, nomeantigo);
     strcpy(ficheirooutput + (strlen(nomeantigo) - 1) , "th" );
@@ -179,7 +228,18 @@ char* ConstroiNome ( char*  nomeantigo ) {
 
 
 
-
+/******************************************************************************
+ * ProcuraExercicios()
+ *
+ * Argumentos:ficheiro - Ponteiro para o ficheiro de onde vamos extrair informação
+ *            numchars - Array que indica quais a quantidade de palavras por tamanho de palavra
+ *            nummutmax - Array que contêm o maior número maximo de mutações para cada tamanho de palavra
+ * Retorna:   Ponteiro para a cabeça da lista que contêm os problemas a resolver
+ * Efeitos-colaterais: ---
+ *
+ * Descrição:
+ *
+ *****************************************************************************/
 t_lista * ProcuraExercicios(FILE* ficheiro, short numchars[MAX_STR], short nummutmax[MAX_STR]) {
   char *inicial=NULL, *final=NULL;
   int n_mutacoes=0, erro, tamanho, tmp;

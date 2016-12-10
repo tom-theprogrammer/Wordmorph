@@ -1,7 +1,16 @@
 #include "ordenador.h"
 #include "prototipos.h"
 
-
+/******************************************************************************
+ * ArrumaDicionario()
+ *
+ * Argumentos:dicionario - Ponteiro para a lista que contêm o dicionario
+ * Retorna: ---
+ * Efeitos-colaterais: ---
+ *
+ * Descrição:
+ *
+ *****************************************************************************/
 void ArrumaDicionario(t_lista * dicionario) {
     payload_dicionario * payloaddicionario;
 
@@ -11,7 +20,18 @@ void ArrumaDicionario(t_lista * dicionario) {
         quicksort((void*)payloaddicionario->palavras, 0 ,payloaddicionario->num_palavras-1);
     }
 }
-
+/******************************************************************************
+* quicksort()
+*
+* Argumentos:a -
+*            l -
+*            r -
+* Retorna: ---
+* Efeitos-colaterais: ---
+*
+* Descrição:
+*
+*****************************************************************************/
 void quicksort(Item a[], int l, int r)
 
 {
@@ -22,6 +42,19 @@ quicksort(a, l, i-1);
 quicksort(a, i+1, r);
 }
 
+
+/******************************************************************************
+ * partition()
+ *
+ * Argumentos:a -
+ *            l -
+ *            r - 
+ * Retorna: 
+ * Efeitos-colaterais: ---
+ *
+ * Descrição:
+ *
+ *****************************************************************************/
 int partition(Item a[], int l, int r)
 {
 int i, j;
@@ -39,11 +72,33 @@ return i;
 }
 
 
+/******************************************************************************
+ * compfunc()
+ *
+ * Argumentos:a -
+ *            b -
+ * Retorna: 
+ * Efeitos-colaterais: ---
+ *
+ * Descrição:
+ *
+ *****************************************************************************/
 int compfunc( const void * a, const void * b ) {
     return stringcompare( (char*) a , (char* )b );
 }
 
 /* assume-se que as palavras têm o mesmo tamanho e são todas de minúsculas */
+/******************************************************************************
+ * stringcompare()
+ *
+ * Argumentos:a - Uma das strings que queremos comparar
+ *            b - Uma das strings que queremos comparar
+ * Retorna: 0 se as palavras forem iguais, 1 se a primeira palavra vier primeiro alfabeticamente, -1 nos restantes casos
+ * Efeitos-colaterais: ---
+ *
+ * Descrição:
+ *
+ *****************************************************************************/
 int stringcompare ( char* a, char* b ) {
     int i;
     for(i=0;a[i]!='\0';i++) {
@@ -53,7 +108,17 @@ int stringcompare ( char* a, char* b ) {
     return 0;
 }
 
-
+/******************************************************************************
+ * encontraposicao()
+ *
+ * Argumentos:exercicios - Ponteiro para a lista que contêm os Problemas a resolver
+ *            dicionariocabeca - Ponteiro para a lista que contêm o dicionario
+ * Retorna: ---
+ * Efeitos-colaterais: ---
+ *
+ * Descrição:
+ *
+ *****************************************************************************/
 void encontraposicao( t_lista * exercicios, t_lista * dicionariocabeca ) {
     payload_exercicios *payloadexercicios= NULL;
     payload_dicionario *payloaddicionario=NULL;
@@ -78,8 +143,21 @@ void encontraposicao( t_lista * exercicios, t_lista * dicionariocabeca ) {
 
 
 
-
-/* https://www.tutorialspoint.com/data_structures_algorithms/binary_search_program_in_c.htm */
+/******************************************************************************
+ * binarysearch()
+ *
+ * Argumentos:table -
+ *            l - 
+ *            r - 
+ *            item -
+ *            comparer() -
+ * Retorna: 
+ * Efeitos-colaterais: ---
+ *
+ * Descrição:
+ *
+ * Fonte: https://www.tutorialspoint.com/data_structures_algorithms/binary_search_program_in_c.htm
+ *****************************************************************************/
 int binarysearch(Type* table, int l, int r, Type item, int comparer(Type, Type) ) {
     int mid,  compareresult;
 
@@ -98,8 +176,6 @@ int binarysearch(Type* table, int l, int r, Type item, int comparer(Type, Type) 
         else
             r = mid -1;
     }
-
     /* at this point something went wrong so -1 is returned */
     return -1;
-
 }
