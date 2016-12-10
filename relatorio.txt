@@ -1,9 +1,35 @@
-Descrição das funções:
+
+Thomas
+    - Mudar os tipos para unsigned short
+    - Comentar
+	estruturas_constantes... .h 
+	oredenador.h
+	filap.c
+	main.c
+    - Relatório
+	Análise Formal
+	Descição das estuturas e tipos de dados
+    - Exemplo
+	
+
+Andre
+    - Comentar
+	Prototipos
+	File.c
+	libertaor.c
+	ordenador.c
+	grafo.c
+    - Relatório
+	Subsistemas
+	Descrição dos Algorítmos
+	Análise Crítica
+	Abordagem do problema (continuar)
 
 
 
-
+*********************************************************
 Descrição do Problema
+*********************************************************
 
 
 Neste projeto pretende-se desenvolver um programa que seja capaz de produzir "caminhos" entre palavras. Entende-se por um caminho entre 2 palavras do mesmo tamanho, dadas como ponto de partida e de chegada, uma sequência de palavras de igual tamanho, em que cada palavra se obtem a partir da sua antecessora por substituicao de um ou mais caracteres por outro(s).  
@@ -20,7 +46,9 @@ pista
 
 Como para este problema existe mais que 1 caminho entre cada palavra: pretende-se econtrar o caminho com o custo menor, ou seja, aquele cujo somatório do quadrado do numero de caracteres diferentes entre cada palavra consecutiva é menor.
 
-Ainda assim, é possivel encontrar mais que 1 caminho com o mesmo custo associado.
+Ainda assim, é possivel encontrar mais que 1 caminho com o mesmo custo associado. No entanto, só é necessário encontrar um que tenha o custo mais baixo.
+
+
 
 
 *********************************************************
