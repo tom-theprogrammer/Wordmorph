@@ -115,7 +115,7 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 
 	for(; it_ex != NULL; it_ex = getProxElementoLista(it_ex) ) {
 		payld_ex = (payload_exercicios *)getItemLista( it_ex );
-
+		
 		for(it_dic=dicionario;it_dic!=NULL;it_dic=getProxElementoLista(it_dic)) {
 			payld_dic = (payload_dicionario *) getItemLista( it_dic );
 			if( payld_dic->num_char == payld_ex->num_char )
@@ -123,10 +123,10 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 		}
 		if( (tmp = comparer2(payld_dic->palavras[ payld_ex->pos_inicial],payld_dic->palavras[ payld_ex->pos_final],payld_ex->max_mutacoes)) <=1 ){
 			fprintf(fp,"%s %d\n",payld_dic->palavras[ payld_ex->pos_inicial],tmp);
-			fprintf(fp,"%s\n\n",payld_dic->palavras[ payld_ex->pos_inicial]);
+			fprintf(fp,"%s\n\n",payld_dic->palavras[ payld_ex->pos_final]);
 		}
 		else{
-			sucesso = dijkstra( payld_ex->pos_inicial, payld_ex->pos_final, payld_dic->adj, payld_dic->num_palavras, payld_ex->max_mutacoes , &st, &wt);
+			sucesso = dijkstra( payld_ex->pos_inicial, payld_ex->pos_final, payld_dic->adj, payld_dic->num_palavras, payld_ex->max_mutacoes , &st, &wt);			
 			if( sucesso == 1 ) {
 				fprintf(fp, "%s %d\n", payld_dic->palavras[payld_ex->pos_inicial] , wt[ payld_ex->pos_final ] );
 				printcaminho(fp, st, payld_ex->pos_final, payld_dic->palavras);

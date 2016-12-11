@@ -156,6 +156,17 @@ void libertaLista(t_lista *lp, void freeItem(Item)) {
 
 
 
+/******************************************************************************
+ * InverteLista ()
+ *
+ * Arguments: lp - pointer to list
+ * Returns:  nova cabeça da lista
+ * Side-Effects: none
+ *
+ * Description: inverte lista
+ *
+ *****************************************************************************/
+
 t_lista * InverteLista( t_lista * l ) {
     t_lista * novo =  NULL, * prox = NULL;
     while(l != NULL) {
