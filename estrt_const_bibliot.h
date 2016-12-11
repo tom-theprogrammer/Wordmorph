@@ -39,6 +39,7 @@ typedef struct{
 
 typedef struct{
 	unsigned short *queue;	/*A fila implementada por tabela*/
+	unsigned short *pos; 	/*Vetor que auxilia a descoberta dos items na tabela*/
 	int free;				/*O numero de itens na tabela*/
 	int size;				/*O tamanho da tabela*/
 }FilaP;

@@ -210,7 +210,7 @@ int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, 
 
 				if( wt[iterador->v_adj] > (int)wt[prio] + (int)iterador->peso ){
 					wt[iterador->v_adj] = (int)wt[prio] + (int)iterador->peso;
-					FixUp(fp,FPDiscover(fp,iterador->v_adj),wt);
+					FixUp(fp,iterador->v_adj,wt);
 					st[iterador->v_adj]=prio;
 					if(iterador->v_adj == fini ) sucesso=1;
 				}

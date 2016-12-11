@@ -15,6 +15,7 @@
 FilaP * FPriorIni(int size){
     FilaP * fp = (FilaP *)x_malloc(sizeof(FilaP));
     fp->queue = (unsigned short *)x_malloc(sizeof(unsigned short)*size);
+    fp->pos = (unsigned short *)x_malloc(sizeof(unsigned short)*size);
     fp->size = size;
     fp->free = 0;
     return fp;
@@ -37,7 +38,8 @@ FilaP * FPriorIni(int size){
 void FInsere(FilaP * fp, int item, unsigned short weight[]){
     if(fp->free < fp->size ){
         fp->queue[fp->free] = item;
-        FixUp(fp,fp->free,weight);
+        fp->pos[item] = fp->free;
+        FixUp(fp,item,weight);
         fp->free++;
         return;
     }
@@ -54,12 +56,13 @@ void FInsere(FilaP * fp, int item, unsigned short weight[]){
  * Retorna: ---
  * Efeitos-colaterais: ----
  *
- * Descrição: Insere um elemento na fila sem verificar se é mantida a condição de acervo
+ * Descrição: Insere um elemento diretamente no fim da fila sem verificar se é mantida a condição de acervo
  *
  *****************************************************************************/
 void FInsereDirec(FilaP * fp, int item) {
     if(fp->free < fp->size) {
         fp->queue[fp->free] = item;
+        fp->pos[item] = fp->free;
         fp->free++;
     }
 }
@@ -82,11 +85,11 @@ int FRemove(FilaP * fp,unsigned short weight[]){
     /* executar a troca */
     aux = fp->queue[0];
     fp->queue[0] = fp->queue[fp->free -1];
-
+    fp->pos[ fp->queue[fp->free -1] ] = 0;
     /* fazer fixdown do trocado */
     fp->free--;
-
-    FixDown(fp,0,fp->free, weight);
+    
+    FixDown(fp, fp->queue[fp->free -1], weight);
 
     return aux;
 }
@@ -106,13 +109,26 @@ int FRemove(FilaP * fp,unsigned short weight[]){
  * Descrição: Faz Fixup do vertice numa entrada da tabela
  *
  *****************************************************************************/
-void FixUp(FilaP *fp , int idx, unsigned short weight[] ){
+/*void FixUp(FilaP *fp , int idx, unsigned short weight[] ){
     int aux;
     while( (idx > 0) && ( weight[ fp->queue[(idx-1)/2] ] > weight[ fp->queue [idx] ]) ){
         aux = fp->queue[(idx-1)/2];
         fp->queue[(idx-1)/2] = fp->queue[idx];
         fp->queue[idx] = aux;
         idx=(idx-1)/2;
+    }
+}*/
+
+void FixUp(FilaP *fp , int item, unsigned short weight[] ){
+    int idx, itempai;
+    idx=fp->pos[item];
+    while( (idx > 0) && ( weight[ itempai = fp->queue[(idx-1)/2] ] > weight[ item ]) ){
+        fp->queue[(idx-1)/2] = item;
+        fp->pos[item] = (idx-1)/2;
+        fp->queue[idx] = itempai;
+        fp->pos[itempai] = idx;
+        idx=(idx-1)/2;
+        item = fp->queue[idx];
     }
 }
 
@@ -129,17 +145,17 @@ void FixUp(FilaP *fp , int idx, unsigned short weight[] ){
  * Descrição: Faz fix down do vertice numa entrada da tabela
  *
  *****************************************************************************/
-void FixDown( FilaP *fp, int idx, int n, unsigned short weight[] ){
+/*void FixDown( FilaP *fp, int idx, int n, unsigned short weight[] ){
     int child;
     int aux;
 
     while( 2 * idx < n -1){
-        /* comparamos os 2 filhos */
-        child = 2*idx+1; /* filho 1 */
+        /* comparamos os 2 filhos *//*
+        child = 2*idx+1; /* filho 1 *//*
         if( (child < n-1) &&  weight[fp->queue[child] ] >  weight[fp->queue[child+1] ] )
             child++;
 
-        /* verificamos se o filho cuja prioridade é maior tem maior prioridade que o pai */
+        /* verificamos se o filho cuja prioridade é maior tem maior prioridade que o pai *//*
         if(weight[fp->queue[idx] ] <  weight[fp->queue[child] ])
             break;
 
@@ -148,6 +164,34 @@ void FixDown( FilaP *fp, int idx, int n, unsigned short weight[] ){
         fp->queue[child] = aux;
 
         idx = child;
+    }
+}*/
+
+void FixDown( FilaP *fp, int item, unsigned short weight[] ){
+    int child, itemchild, aux;
+    int idx = fp->pos[item];
+
+    while( 2 * idx < fp->free -1){
+        /* comparamos os 2 filhos */
+        child = 2*idx+1; /* filho 1 */
+        if( (child < fp->free-1) &&  weight[fp->queue[child] ] >  weight[fp->queue[child+1] ] )
+            child++; /*filho 2*/
+
+        itemchild = fp->queue[child];
+
+        /* verificamos se o filho cuja prioridade é maior tem maior prioridade que o pai */
+        if(weight[item] <  weight[itemchild])
+            break;
+
+        item = fp->queue[idx];
+        fp->pos[item] = idx;
+        fp->queue[idx] = itemchild;
+        fp->pos[itemchild] = idx;
+        fp->queue[child] = item;
+        fp->pos[item] = child;
+
+        idx = child;
+        item = fp->queue[idx];
     }
 }
 
@@ -164,6 +208,7 @@ void FixDown( FilaP *fp, int idx, int n, unsigned short weight[] ){
  *****************************************************************************/
 void FPfree(FilaP *  fp){
     free(fp->queue);
+    free(fp->pos);
     free(fp);
 }
 
@@ -179,11 +224,11 @@ void FPfree(FilaP *  fp){
  * Descrição: Procura o indice do vertice, ou retorna -1 em insucesso
  *
  *****************************************************************************/
-int FPDiscover(FilaP *fp, int v) {
+/*int FPDiscover(FilaP *fp, int v) {
   int i;
   for(i=0;i<fp->free;i++) {
     if( fp->queue[i] == v ) return i;
   }
   return -1;
   exit(0);
-}
+}*/
