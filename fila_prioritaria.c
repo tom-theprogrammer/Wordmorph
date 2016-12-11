@@ -1,5 +1,6 @@
 #include "estrt_const_bibliot.h"
 #include "prototipos.h"
+#include "fila_prioritaria.h"
 
 
 FilaP * FPriorIni(int size){

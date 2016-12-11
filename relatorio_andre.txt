@@ -1,0 +1,91 @@
+
+Thomas
+    - Mudar os tipos para unsigned short
+    - Comentar
+	estruturas_constantes... .h 
+	oredenador.h
+	filap.c
+	main.c
+    - Relatório
+	Análise Formal
+	Descição das estuturas e tipos de dados
+	Exemplo
+	
+
+Andre
+    - Comentar
+	Prototipos
+	File.c
+	libertaor.c
+	ordenador.c
+	grafo.c
+    - Relatório
+	Subsistemas
+	Descrição dos Algorítmos
+	Análise Crítica
+	Abordagem do problema (continuar)
+
+
+
+*********************************************************
+Descrição do Problema
+*********************************************************
+
+
+Neste projeto pretende-se desenvolver um programa que seja capaz de produzir "caminhos" entre palavras. Entende-se por um caminho entre 2 palavras do mesmo tamanho, dadas como ponto de partida e de chegada, uma sequência de palavras de igual tamanho, em que cada palavra se obtem a partir da sua antecessora por substituicao de um ou mais caracteres por outro(s).  
+
+Por exemplo, seja a seguinte sequência de palavras, que estabelece um caminho de palavras entre a palavracarro e a palavra pista:
+
+
+carro
+corro
+porto
+porta
+posta
+pista
+
+Como para este problema existe mais que 1 caminho entre cada palavra: pretende-se econtrar o caminho com o custo menor, ou seja, aquele cujo somatório do quadrado do numero de caracteres diferentes entre cada palavra consecutiva é menor.
+
+Ainda assim, é possivel encontrar mais que 1 caminho com o mesmo custo associado. No entanto, só é necessário encontrar um que tenha o custo mais baixo.
+
+
+
+
+*********************************************************
+Abordagem ao Problema
+*********************************************************
+
+Este tabalho foi dividido em 2 submissões sendo que a primeira teve como objetivo criar funções necessárias para a execução da segunda. 
+Na primeira parte criámos as funções para carregar os exercícios e dicionários e funções que localizam cada palavra dos exercícios (inicial e final) no dicionário.
+
+Completadas estas funções para a primeira parte, procedemos com a execução do algorítmo que descobre o caminho pertendido: o algorítmo de Dijkstra.
+
+Por fim, quando calculados os caminhos de memor peso, estes são colocados num ficheiro de saída que contém o camiho e o respetivo peso.
+
+
+*********************************************************
+Arquitetura do problema 
+*********************************************************
+
+Na execução do programa começamos por carregar os exercícios para a memória. Estes exercícios ficam armazenados numa fila simplesmente ligada. O payload de cada nó contém 6 infomações: as palavras inicial e final, o número de caracteres das palavras, a posição das palavras inicial e final no dicionário, o número maximo de mutações que este exercício aceita, sendo que este valor não precisa de ser superior ao número  de caracteres diferentes que as palavras inicial e final têm, pois a pontuação máxima nunca será superior ao numero de caracteres diferentes ao quadrado (quando o único caminho é o direto). Simultaneamente ao carregamento dos exercícios, são preenchidas 2 tabelas: uma que conta o número de palavras por cada tamanho de palavra, e um vetor que regista o número máximo mutações entre os exercícios do mesmo tamanho de palavra.
+
+O passo seguinte à alocação dos exercícios em memória é a alocação do dicionário. Como existem palavras de diferentes tamanhos no dicionário é necessário criar um subdicionário por tamanho de palavra. Cada subdicionário é um nó numa lista simplesmente ligada que contém um outro campo que é o numero de caractéres que cada palavra daquele subdicionário contém.
+
+Uma vez carregados os dicionários para a memória é necessário colocá-los por ordem alfabética, porque no passo a seguir é necessário encontrar a posição das palavras no dicionário 
+
+Após a colocação do dicionário na tabela, aplicamos o algorítmo binarysearch para descobrir a posição das palavras inicial e final dos exercícios no dicionário. Uma vez que já temos uma referência para as palavras do dicionário, deixa de ser necessário ser necesário armazenar as palavras, pelo que as libertamos de volta para a memória.
+
+O algoritmo de dijkstra é um algorítmo que encontra o caminho mais curto de um vértice de origem a todos os outros num grafo ponderado. No contexto deste problema 
+
+**********************************************************
+Tipos de dados
+**********************************************************
+
+
+**********************************************************
+Analise formal
+**********************************************************
+1º - ProcuraExercicios - complexidade linear
+2º - 
+
+

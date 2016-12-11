@@ -23,15 +23,7 @@ void free_exercicios( Item  aaa );
 void * x_malloc(size_t size);
 
 /* ordenador.c */
-void ArrumaDicionario(t_lista * dicionario);
-void mergesort(Type * table, int low, int high, int comparer(Type, Type) );
-void merge(Type * table, int low, int mid, int high, int comparer(Type, Type) );
-int  stringcompare ( char* a, char* b );
-int  binarysearch(Type* table, int l, int r, Type item, int comparer(Type, Type) );
-void encontraposicao( t_lista * exercicios, t_lista * dicionariocabeca );
-int  compfunc( const void * a, const void * b );
-void quicksort(Item a[], int l, int r);
-int  partition(Item a[], int l, int r);
+
 
 /*grafo.c*/
 void cria_todos_grafos(t_lista * dicionario,short nmutmax[] );
@@ -41,16 +33,5 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 void printcaminho(FILE*fp, unsigned short* st, unsigned short n, char** palavras);
 int  dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, unsigned short ** _st, unsigned short ** _wt );
 
-
-
-/*fila_prioritaria.c*/
-FilaP *FPriorIni(int);										/*Aloca e inicializa uma fila prioritaria*/
-void   FInsere(FilaP * fp, int item, unsigned short weight[]);			/*Insere um elemento na fila prioritáira*/
-void   FInsereDirec(FilaP * fp, int item);                    /*Insere um elemento sem se preocupar com concertar a prioridade */ 
-int    FRemove(FilaP * fp, unsigned short weight[]);				    /*Remove um elemento da fila prioritária*/
-void   FixUp(FilaP * , int idx, unsigned short weight[] );			/*Ajusta a localização de um elemento cuja prioridade foi aumentada*/
-void   FixDown(FilaP *, int idx, int n, unsigned short weight[] );/*Ajusta a localização de um elemento cuja prioridade foi diminuida>*/
-void   FPfree(FilaP *  fp);                                 /*Liberta memoria alocada para o uso da lista prioritária*/
-int    FPDiscover(FilaP *fp, int v);
 
 #endif

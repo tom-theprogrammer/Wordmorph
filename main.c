@@ -28,12 +28,12 @@ int main(int argc, char *argv[])
 	encontraposicao( exercicios, dicionario );
 
 	cria_todos_grafos(dicionario,nmutmax);
-/*
+
 	nomesaida = ConstroiNome( argv[2] );
 
 	encontracaminhos( dicionario, exercicios, nomesaida );
 
 	Freedoom(dicionario, exercicios);
-*/
+
 	return 0;
 }

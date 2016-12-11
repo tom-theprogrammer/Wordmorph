@@ -1,6 +1,8 @@
 #include "ordenador.h"
 #include "prototipos.h"
 
+
+
 /******************************************************************************
  * ArrumaDicionario()
  *

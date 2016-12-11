@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "list.h"
-#include "ordenador.h"
 
 #define key(A) (A)
 #define less(A, B)  (strcmp(A,B) < 0)
