@@ -89,7 +89,7 @@ int FRemove(FilaP * fp,unsigned short weight[]){
     /* fazer fixdown do trocado */
     fp->free--;
     
-    FixDown(fp, fp->queue[fp->free -1], weight);
+    FixDown(fp, fp->queue[fp->free ], weight);
 
     return aux;
 }

@@ -1,20 +1,31 @@
-farmacia 32
+farmacia 21
 farmacos
 fariamos
-geriamos
-gemiamos
+feriamos
+teriamos
+temiamos
 remiamos
 remedios
 
-farmacia 39
-formaria
-formaras
-coroaras
-comparas
-comedias
+farmacia 21
+farmacos
+fariamos
+feriamos
+teriamos
+temiamos
+remiamos
 remedios
 
-farmacia -1
+farmacia 22
+farmacos
+fariamos
+pariamos
+parirmos
+pararmos
+pagarmos
+pegarmos
+regarmos
+regadios
 remedios
 
 farmacia -1
@@ -23,20 +34,33 @@ remedios
 remedios -1
 farmacia
 
-remedios -1
+remedios 22
+remedias
+remirias
+remirmos
+remiamos
+temiamos
+teriamos
+feriamos
+fariamos
+farmacos
 farmacia
 
-remedios 31
-remedeis
-receteis
-recearia
-rarearia
+remedios 21
+remiamos
+temiamos
+teriamos
+feriamos
+fariamos
+farmacos
 farmacia
 
-remedios 31
-remedeis
-receteis
-recearia
-rarearia
+remedios 21
+remiamos
+temiamos
+teriamos
+feriamos
+fariamos
+farmacos
 farmacia
 

@@ -1,0 +1,49 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AbreFicheiro	file.c	/^FILE *AbreFicheiro ( char *nome, char *mode ) {$/;"	f
+AlocaDicionario	file.c	/^t_lista * AlocaDicionario (FILE * f,short numchars[MAX_STR]){$/;"	f
+ArrumaDicionario	ordenador.c	/^void ArrumaDicionario(t_lista * dicionario) {$/;"	f
+ConstroiNome	file.c	/^char* ConstroiNome( char*  nomeantigo ) {$/;"	f
+EscreveFicheiro	file.c	/^void EscreveFicheiro(char* nome, t_lista * exercicios, t_lista * dicionario){$/;"	f
+FInsere	fila_prioritaria.c	/^void FInsere(FilaP * fp, int item, unsigned short weight[]){$/;"	f
+FInsereDirec	fila_prioritaria.c	/^void FInsereDirec(FilaP * fp, int item) {$/;"	f
+FPfree	fila_prioritaria.c	/^void FPfree(FilaP *  fp){$/;"	f
+FPriorIni	fila_prioritaria.c	/^FilaP * FPriorIni(int size){$/;"	f
+FRemove	fila_prioritaria.c	/^int FRemove(FilaP * fp,unsigned short weight[]){$/;"	f
+FixDown	fila_prioritaria.c	/^void FixDown( FilaP *fp, int item, unsigned short weight[] ){$/;"	f
+FixUp	fila_prioritaria.c	/^void FixUp(FilaP *fp , int item, unsigned short weight[] ){$/;"	f
+Freedoom	libertador.c	/^void Freedoom ( t_lista * dicionario, t_lista * exercicios) {$/;"	f
+InverteLista	list.c	/^t_lista * InverteLista( t_lista * l ) {$/;"	f
+LePalavra	file.c	/^char* LePalavra( FILE * f ) {$/;"	f
+LeParametros	file.c	/^int LeParametros(FILE * f, char ** inicial, char ** final, int *quant){$/;"	f
+PreencheDicionario	file.c	/^void PreencheDicionario(FILE * f, t_lista * dicionario, short numchars[MAX_STR]){$/;"	f
+ProcuraExercicios	file.c	/^t_lista * ProcuraExercicios(FILE* ficheiro, short numchars[MAX_STR], short nummutmax[MAX_STR]) {$/;"	f
+_t_lista	list.c	/^struct _t_lista {$/;"	s	file:
+binarysearch	ordenador.c	/^int binarysearch(Type* table, int l, int r, Type item, int comparer(Type, Type) ) {$/;"	f
+comparer2	grafo.c	/^int comparer2( char * p1, char* p2, short n) {$/;"	f
+compfunc	ordenador.c	/^int compfunc( const void * a, const void * b ) {$/;"	f
+criaNovoNoLista	list.c	/^t_lista  *criaNovoNoLista (t_lista* lp, Item this, int *err) {$/;"	f
+cria_grafo	grafo.c	/^void cria_grafo( payload_dicionario * payld, short nmutmax ) {$/;"	f
+cria_todos_grafos	grafo.c	/^void cria_todos_grafos(t_lista * dicionario,short nmutmax[] ){$/;"	f
+dijkstra	grafo.c	/^int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, unsigned short ** _st, unsigned short ** _wt ){$/;"	f
+encontracaminhos	grafo.c	/^void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomeficheiro ) {$/;"	f
+encontraposicao	ordenador.c	/^void encontraposicao( t_lista * exercicios, t_lista * dicionariocabeca ) {$/;"	f
+free_exercicios	libertador.c	/^void free_exercicios( Item aaa ) { $/;"	f
+freepldicionario	libertador.c	/^void freepldicionario( Item aaa ) {$/;"	f
+getItemLista	list.c	/^Item getItemLista (t_lista *p) {$/;"	f
+getProxElementoLista	list.c	/^t_lista *getProxElementoLista(t_lista *p) {$/;"	f
+iniLista	list.c	/^t_lista  *iniLista(void) {$/;"	f
+libertaLista	list.c	/^void libertaLista(t_lista *lp, void freeItem(Item)) {$/;"	f
+main	main.c	/^int main(int argc, char *argv[])$/;"	f
+numItensNaLista	list.c	/^int numItensNaLista(t_lista *lp) {$/;"	f
+partition	ordenador.c	/^int partition(Item a[], int l, int r)$/;"	f
+printcaminho	grafo.c	/^void printcaminho(FILE*fp, unsigned short* st, unsigned short n, char** palavras) {$/;"	f
+prox	list.c	/^  struct _t_lista *prox;$/;"	m	struct:_t_lista	typeref:struct:_t_lista::_t_lista	file:
+quicksort	ordenador.c	/^void quicksort(Item a[], int l, int r)$/;"	f
+stringcompare	ordenador.c	/^int stringcompare ( char* a, char* b ) {$/;"	f
+this	list.c	/^  Item this;$/;"	m	struct:_t_lista	file:
+x_malloc	libertador.c	/^void * x_malloc(size_t size){$/;"	f
