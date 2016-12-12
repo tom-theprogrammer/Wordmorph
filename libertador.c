@@ -9,7 +9,7 @@
  * Retorna: ---
  * Efeitos-colaterais: ---
  *
- * Descrição:
+ * Descrição: Liberta o payload do dicionário
  *
  *****************************************************************************/
 void freepldicionario( Item aaa ) {
@@ -40,7 +40,7 @@ void freepldicionario( Item aaa ) {
  * Retorna: ---
  * Efeitos-colaterais: ---
  *
- * Descrição:
+ * Descrição: Liberta o payload dos exercícios
  *
  *****************************************************************************/
 void free_exercicios( Item aaa ) { 

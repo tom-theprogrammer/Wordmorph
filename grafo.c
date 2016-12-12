@@ -35,7 +35,7 @@ void cria_todos_grafos(t_lista * dicionario,short nmutmax[] ){
  * Retorna: ---
  * Efeitos-colaterais: ----
  *
- * Descrição:
+ * Descrição: Constroi a matriz lista de adjacências para o respetivo dicionário
  *
  *****************************************************************************/
 void cria_grafo( payload_dicionario * payld, short nmutmax ) {
@@ -181,7 +181,7 @@ void printcaminho(FILE*fp, unsigned short* st, unsigned short n, char** palavras
  			  0 caso contrário
  * Efeitos-colaterais: ----
  *
- * Descrição:
+ * Descrição: Algoritmo que encontra caminhos entre palavras num grafo
  *
  *****************************************************************************/
 int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, unsigned short ** _st, unsigned short ** _wt ){
@@ -201,8 +201,6 @@ int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, 
 	}
 	wt[ini] = 0;
 	FixUp(fp, ini, wt);
-
-	/*printf("%d %d %d\n",  wt[ fp->queue[0]], wt[ fp->queue[1]], wt[ fp->queue[2]]);*/
 
 	while( fp->free != 0 ) {		
 		if( wt[prio = FRemove(fp,wt)] != INFINITE  ){

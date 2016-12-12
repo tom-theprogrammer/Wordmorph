@@ -10,7 +10,7 @@
  * Retorna: ---
  * Efeitos-colaterais: ---
  *
- * Descrição:
+ * Descrição: Arruma cada um dos dicionários 
  *
  *****************************************************************************/
 void ArrumaDicionario(t_lista * dicionario) {
@@ -31,7 +31,7 @@ void ArrumaDicionario(t_lista * dicionario) {
 * Retorna: ---
 * Efeitos-colaterais: ---
 *
-* Descrição:
+* Descrição: Algorimtmo de ordenação
 *
 *****************************************************************************/
 void quicksort(Item a[], int l, int r)
@@ -54,7 +54,7 @@ void quicksort(Item a[], int l, int r)
  * Retorna: 
  * Efeitos-colaterais: ---
  *
- * Descrição:
+ * Descrição: Função necessária pelo algorimo quicksort
  *
  *****************************************************************************/
 int partition(Item a[], int l, int r)
@@ -82,7 +82,7 @@ int partition(Item a[], int l, int r)
  * Retorna: 
  * Efeitos-colaterais: ---
  *
- * Descrição:
+ * Descrição: Função que descobre se à diferenças entre as palavras
  *
  *****************************************************************************/
 int compfunc( const void * a, const void * b ) {
@@ -98,7 +98,7 @@ int compfunc( const void * a, const void * b ) {
  * Retorna: 0 se as palavras forem iguais, 1 se a primeira palavra vier primeiro alfabeticamente, -1 nos restantes casos
  * Efeitos-colaterais: ---
  *
- * Descrição:
+ * Descrição: verifica se 2 palavras são iguais
  *
  *  assume-se que as palavras têm o mesmo tamanho e são todas de minúsculas
  *****************************************************************************/
@@ -119,7 +119,7 @@ int stringcompare ( char* a, char* b ) {
  * Retorna: ---
  * Efeitos-colaterais: ---
  *
- * Descrição:
+ * Descrição: procura cada uma das palavras no dicionario
  *
  *****************************************************************************/
 void encontraposicao( t_lista * exercicios, t_lista * dicionariocabeca ) {
@@ -135,10 +135,13 @@ void encontraposicao( t_lista * exercicios, t_lista * dicionariocabeca ) {
             payloaddicionario=(payload_dicionario*) getItemLista(iterador);
             if(payloaddicionario->num_char==numchars) break;
         }
+        /* Procura da palavra inicial */
         posicaostart = binarysearch(payloaddicionario->palavras,0,payloaddicionario->num_palavras-1,payloadexercicios->palavra_inicial,stringcompare);
         payloadexercicios->pos_inicial = posicaostart;
+        /* Procura da palavra final */
         posicaolast = binarysearch(payloaddicionario->palavras,0,payloaddicionario->num_palavras-1,payloadexercicios->palavra_final,stringcompare);
         payloadexercicios->pos_final = posicaolast;
+        /* Já não é necessário manter as palavras na memória */
         free(payloadexercicios->palavra_inicial);
         free(payloadexercicios->palavra_final);
     }
@@ -157,7 +160,7 @@ void encontraposicao( t_lista * exercicios, t_lista * dicionariocabeca ) {
  * Retorna: 
  * Efeitos-colaterais: ---
  *
- * Descrição:
+ * Descrição: Algoritmo de procura de palavras com complexidade logarítmica
  *
  * Fonte: https://www.tutorialspoint.com/data_structures_algorithms/binary_search_program_in_c.htm
  *****************************************************************************/

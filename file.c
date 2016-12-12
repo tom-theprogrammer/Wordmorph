@@ -11,7 +11,7 @@
  * Retorna: Ponteiro para ficheiro aberto
  * Efeitos-colaterais: Exit se o ficheiro passado não poder ser aberto
  *
- * Descrição:
+ * Descrição: Abri um ficheiro após verificar se existe
  *
  *****************************************************************************/
 FILE *AbreFicheiro ( char *nome, char *mode ) {
@@ -30,7 +30,7 @@ FILE *AbreFicheiro ( char *nome, char *mode ) {
  * Retorna: Ponteiro para a palavra lida
  * Efeitos-colaterais: Return NUll se nao conseguir ler a palavra
  *
- * Descrição:
+ * Descrição: Le uma palvra do ficheiro e aloca memória para ela
  *
  *****************************************************************************/
 char* LePalavra( FILE * f ) {
@@ -62,7 +62,7 @@ char* LePalavra( FILE * f ) {
               0,1 ou 2 se existir um erro na leitura do ficheiro
  * Efeitos-colaterais: ---
  *
- * Descrição:
+ * Descrição: Lê os parâmetros de cada um dos exercícios do ficheiro
  *
  *****************************************************************************/
 int LeParametros(FILE * f, char ** inicial, char ** final, int *quant){
@@ -91,7 +91,7 @@ int LeParametros(FILE * f, char ** inicial, char ** final, int *quant){
  * Retorna:   Ponteiro para a cabeça da lista que é o dicionario
  * Efeitos-colaterais: ---
  *
- * Descrição: 
+ * Descrição: Carrega o dicionário para a memória 
  *
  *****************************************************************************/
 t_lista * AlocaDicionario (FILE * f,short numchars[MAX_STR]){
@@ -132,7 +132,7 @@ t_lista * AlocaDicionario (FILE * f,short numchars[MAX_STR]){
  * Retorna:  ---
  * Efeitos-colaterais: ---
  *
- * Descrição:
+ * Descrição: Coloca as palavras do ficheiro na tabela
  *
  *****************************************************************************/
 void PreencheDicionario(FILE * f, t_lista * dicionario, short numchars[MAX_STR]){
@@ -161,53 +161,6 @@ void PreencheDicionario(FILE * f, t_lista * dicionario, short numchars[MAX_STR])
 
 
 
-
-
-/******************************************************************************
- * EscreveFicheiro()
- *
- * Argumentos:nome - Nome do ficheiro de entrada que nos premitira descobrir o nome do de saída
- *            exercicios - Ponteiro para a lista que contêm os Problemas a resolver
- *            dicionario - Ponteiro para a lista que contêm o dicionario
- * Retorna: ---
- * Efeitos-colaterais: ---
- *
- * Descrição:
- *
- *****************************************************************************/
-void EscreveFicheiro(char* nome, t_lista * exercicios, t_lista * dicionario){
-    char* ficheirooutput = ConstroiNome(nome);
-    FILE * f = AbreFicheiro(ficheirooutput,"w");
-    t_lista * iterador = dicionario;
-	payload_exercicios * payloadexercicios = NULL;
-    payload_dicionario * payloaddicionario = getItemLista(iterador);
-
-	for(;exercicios != NULL; exercicios = getProxElementoLista(exercicios)){
-		payloadexercicios = (payload_exercicios *)getItemLista(exercicios);
-
-        if(payloadexercicios->max_mutacoes == 1) {
-            iterador = dicionario;
-            payloaddicionario = getItemLista(iterador);
-
-            while(payloadexercicios->num_char != payloaddicionario->num_char){
-              iterador = getProxElementoLista(iterador);
-              payloaddicionario = getItemLista(iterador);
-            }
-
-
-            fprintf(f, "%s %d\n\n",payloadexercicios->palavra_inicial,payloaddicionario->num_palavras);
-        }
-        else {
-            fprintf(f,"%s %d\n%s %d\n\n",payloadexercicios->palavra_inicial,payloadexercicios->pos_inicial,payloadexercicios->palavra_final,payloadexercicios->pos_final);
-        }
-	}
-
-    fclose(f);
-    free(ficheirooutput);
-
-}
-
-
 /******************************************************************************
  * ConstroiNome()
  *
@@ -215,7 +168,7 @@ void EscreveFicheiro(char* nome, t_lista * exercicios, t_lista * dicionario){
  * Retorna:   Ponteiro para a string que contêm o nome do ficheiro de escrita
  * Efeitos-colaterais: ---
  *
- * Descrição:
+ * Descrição: Adiciona a extensão .pal
  *
  *****************************************************************************/
 char* ConstroiNome( char*  nomeantigo ) {
@@ -237,7 +190,7 @@ char* ConstroiNome( char*  nomeantigo ) {
  * Retorna:   Ponteiro para a cabeça da lista que contêm os problemas a resolver
  * Efeitos-colaterais: ---
  *
- * Descrição:
+ * Descrição: Coloca os exercícios na memória
  *
  *****************************************************************************/
 t_lista * ProcuraExercicios(FILE* ficheiro, short numchars[MAX_STR], short nummutmax[MAX_STR]) {

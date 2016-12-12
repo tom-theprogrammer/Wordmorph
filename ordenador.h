@@ -6,6 +6,7 @@
 
 typedef char* Type;
 
+/* Prototipos */
 void ArrumaDicionario(t_lista * dicionario);
 void mergesort(Type * table, int low, int high, int comparer(Type, Type) );
 void merge(Type * table, int low, int mid, int high, int comparer(Type, Type) );

@@ -109,17 +109,7 @@ int FRemove(FilaP * fp,unsigned short weight[]){
  * Descrição: Faz Fixup do vertice numa entrada da tabela
  *
  *****************************************************************************/
-/*void FixUp(FilaP *fp , int idx, unsigned short weight[] ){
-    int aux;
-    while( (idx > 0) && ( weight[ fp->queue[(idx-1)/2] ] > weight[ fp->queue [idx] ]) ){
-        aux = fp->queue[(idx-1)/2];
-        fp->queue[(idx-1)/2] = fp->queue[idx];
-        fp->queue[idx] = aux;
-        idx=(idx-1)/2;
-    }
-}*/
 
-/*
 void FixUp(FilaP *fp , int item, unsigned short weight[] ){
     int idx, itempai;
     idx=fp->pos[item];
@@ -128,26 +118,6 @@ void FixUp(FilaP *fp , int item, unsigned short weight[] ){
         fp->pos[item] = (idx-1)/2;
         fp->queue[idx] = itempai;
         fp->pos[itempai] = idx;
-        idx=(idx-1)/2;
-        item = fp->queue[idx];
-    }
-}
-*/
-
-
-void FixUp(FilaP *fp , int item, unsigned short weight[] ){
-    int idx, itempai, pos_tmp;
-    idx=fp->pos[item];
-    while( (idx > 0) && ( weight[ itempai = fp->queue[(idx-1)/2] ] > weight[ item ]) ){
-        
-        fp->queue[(idx-1)/2] = item;
-        fp->queue[idx] = itempai;
-
-        pos_tmp = fp->pos[itempai];
-        fp->pos[itempai] = fp->pos[item];
-        fp->pos[item] = pos_tmp;
-        
-        
         idx=(idx-1)/2;
         item = fp->queue[idx];
     }
@@ -166,27 +136,6 @@ void FixUp(FilaP *fp , int item, unsigned short weight[] ){
  * Descrição: Faz fix down do vertice numa entrada da tabela
  *
  *****************************************************************************/
-/*void FixDown( FilaP *fp, int idx, int n, unsigned short weight[] ){
-    int child;
-    int aux;
-
-    while( 2 * idx < n -1){
-        /* comparamos os 2 filhos *//*
-        child = 2*idx+1; /* filho 1 *//*
-        if( (child < n-1) &&  weight[fp->queue[child] ] >  weight[fp->queue[child+1] ] )
-            child++;
-
-        /* verificamos se o filho cuja prioridade é maior tem maior prioridade que o pai *//*
-        if(weight[fp->queue[idx] ] <  weight[fp->queue[child] ])
-            break;
-
-        aux = fp->queue[idx];
-        fp->queue[idx] = fp->queue[child];
-        fp->queue[child] = aux;
-
-        idx = child;
-    }
-}*/
 
 void FixDown( FilaP *fp, int item, unsigned short weight[] ){
     int child, itemchild, aux;
@@ -234,22 +183,3 @@ void FPfree(FilaP *  fp){
 }
 
 
-/******************************************************************************
- * FPDiscover()
- *
- * Argumentos:  fp - ponteiro para a fila
- *              v - vertice cuja localização queremos descobrir
- * Retorna:     i - indice do vértice
- * Efeitos-colaterais: ----
- *
- * Descrição: Procura o indice do vertice, ou retorna -1 em insucesso
- *
- *****************************************************************************/
-/*int FPDiscover(FilaP *fp, int v) {
-  int i;
-  for(i=0;i<fp->free;i++) {
-    if( fp->queue[i] == v ) return i;
-  }
-  return -1;
-  exit(0);
-}*/
