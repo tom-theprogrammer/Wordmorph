@@ -138,7 +138,7 @@ void FixUp(FilaP *fp , int item, unsigned short weight[] ){
  *****************************************************************************/
 
 void FixDown( FilaP *fp, int item, unsigned short weight[] ){
-    int child, itemchild, aux;
+    int child, itemchild;
     int idx = fp->pos[item];
 
     while( 2 * idx < fp->free -1){

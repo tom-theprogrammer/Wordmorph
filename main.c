@@ -1,6 +1,7 @@
 #include "estrt_const_bibliot.h"
 #include "prototipos.h"
-
+#include "ordenador.h"
+#include "fila_prioritaria.h"
 
 int main(int argc, char *argv[])
 {

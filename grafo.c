@@ -109,7 +109,7 @@ void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomefic
 	payload_exercicios * payld_ex = NULL, * payld_ex_prox = NULL;
 	payload_dicionario * payld_dic = NULL;
 	unsigned short * st = NULL, * wt = NULL;
-	int i, sucesso, tmp, usaranterior = 0;
+	int sucesso, tmp, usaranterior = 0;
 	FILE* fp = AbreFicheiro(nomeficheiro, "w");
 
 	for(; it_ex != NULL; it_ex = getProxElementoLista(it_ex) ) {
@@ -202,7 +202,7 @@ void printcaminho(FILE*fp, unsigned short* st, unsigned short n, char** palavras
  *
  *****************************************************************************/
 int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, unsigned short ** _st, unsigned short ** _wt ){
-	int prio=0, v=0, sucesso=0, item=0, i;
+	int prio=0, v=0, sucesso=0;
 	unsigned short *st=NULL, *wt=NULL;
 	FilaP * fp = NULL;
 	lista_adjs * iterador = NULL;
