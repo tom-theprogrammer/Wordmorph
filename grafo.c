@@ -105,40 +105,57 @@ int comparer2( char * p1, char* p2, short n) {
  *
  *****************************************************************************/
 void encontracaminhos( t_lista * dicionario, t_lista * exercicios, char* nomeficheiro ) {
-	t_lista * it_ex = exercicios, * it_dic = NULL;
-	payload_exercicios * payld_ex = NULL;
+	t_lista * it_ex = exercicios, * it_dic = NULL, * prox_ex;
+	payload_exercicios * payld_ex = NULL, * payld_ex_prox = NULL;
 	payload_dicionario * payld_dic = NULL;
 	unsigned short * st = NULL, * wt = NULL;
-	int i, sucesso, tmp;
+	int i, sucesso, tmp, usaranterior = 0;
 	FILE* fp = AbreFicheiro(nomeficheiro, "w");
-
 
 	for(; it_ex != NULL; it_ex = getProxElementoLista(it_ex) ) {
 		payld_ex = (payload_exercicios *)getItemLista( it_ex );
-		
+	
+		/* Primerio encontramos o grafo certo */
 		for(it_dic=dicionario;it_dic!=NULL;it_dic=getProxElementoLista(it_dic)) {
 			payld_dic = (payload_dicionario *) getItemLista( it_dic );
 			if( payld_dic->num_char == payld_ex->num_char )
 				break;
 		}
+
 		if( (tmp = comparer2(payld_dic->palavras[ payld_ex->pos_inicial],payld_dic->palavras[ payld_ex->pos_final],payld_ex->max_mutacoes)) <=1 ){
 			fprintf(fp,"%s %d\n",payld_dic->palavras[ payld_ex->pos_inicial],tmp);
 			fprintf(fp,"%s\n\n",payld_dic->palavras[ payld_ex->pos_final]);
+			continue;
 		}
-		else{
+	
+		if ( usaranterior == 1 ) 
+			usaranterior = 0;
+		else
 			sucesso = dijkstra( payld_ex->pos_inicial, payld_ex->pos_final, payld_dic->adj, payld_dic->num_palavras, payld_ex->max_mutacoes , &st, &wt);			
-			if( sucesso == 1 ) {
-				fprintf(fp, "%s %d\n", payld_dic->palavras[payld_ex->pos_inicial] , wt[ payld_ex->pos_final ] );
-				printcaminho(fp, st, payld_ex->pos_final, payld_dic->palavras);
-			}
-			else {
-				fprintf(fp, "%s -1\n", payld_dic->palavras[ payld_ex->pos_inicial] );
-				fprintf(fp, "%s\n", payld_dic->palavras[payld_ex->pos_final]);
-			}
-			fprintf(fp, "\n" );
-			free(st);
-			free(wt);
+		
+		if( sucesso == 1 ) {
+			fprintf(fp, "%s %d\n", payld_dic->palavras[payld_ex->pos_inicial] , wt[ payld_ex->pos_final ] );
+			printcaminho(fp, st, payld_ex->pos_final, payld_dic->palavras);
 		}
+		else {
+			fprintf(fp, "%s -1\n", payld_dic->palavras[ payld_ex->pos_inicial] );
+			fprintf(fp, "%s\n", payld_dic->palavras[payld_ex->pos_final]);
+		}
+		fprintf(fp, "\n" );
+		
+		/* Agora verificamos se é necessário aplicar o algorítmo de dijkstra outra vez */
+		prox_ex = getProxElementoLista( it_ex );
+		if( prox_ex != NULL) {
+			payld_ex_prox = (payload_exercicios *)getItemLista( prox_ex );
+			if( payld_ex->pos_inicial == payld_ex_prox->pos_inicial && 
+				payld_ex->max_mutacoes == payld_ex_prox->max_mutacoes ) {
+					usaranterior = 1;
+					continue;
+				}
+		}
+
+		free(st);
+		free(wt);
 	}
 
 	free(nomeficheiro);
