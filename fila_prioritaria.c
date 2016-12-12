@@ -119,6 +119,7 @@ int FRemove(FilaP * fp,unsigned short weight[]){
     }
 }*/
 
+/*
 void FixUp(FilaP *fp , int item, unsigned short weight[] ){
     int idx, itempai;
     idx=fp->pos[item];
@@ -127,6 +128,26 @@ void FixUp(FilaP *fp , int item, unsigned short weight[] ){
         fp->pos[item] = (idx-1)/2;
         fp->queue[idx] = itempai;
         fp->pos[itempai] = idx;
+        idx=(idx-1)/2;
+        item = fp->queue[idx];
+    }
+}
+*/
+
+
+void FixUp(FilaP *fp , int item, unsigned short weight[] ){
+    int idx, itempai, pos_tmp;
+    idx=fp->pos[item];
+    while( (idx > 0) && ( weight[ itempai = fp->queue[(idx-1)/2] ] > weight[ item ]) ){
+        
+        fp->queue[(idx-1)/2] = item;
+        fp->queue[idx] = itempai;
+
+        pos_tmp = fp->pos[itempai];
+        fp->pos[itempai] = fp->pos[item];
+        fp->pos[item] = pos_tmp;
+        
+        
         idx=(idx-1)/2;
         item = fp->queue[idx];
     }

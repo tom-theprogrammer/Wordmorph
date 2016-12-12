@@ -202,7 +202,7 @@ int dijkstra( int ini, int fini, lista_adjs** lista , int num_v, short max_mut, 
 	wt[ini] = 0;
 	FixUp(fp, ini, wt);
 
-	printf("%d %d %d\n",  wt[ fp->queue[0]], wt[ fp->queue[1]], wt[ fp->queue[2]]);
+	/*printf("%d %d %d\n",  wt[ fp->queue[0]], wt[ fp->queue[1]], wt[ fp->queue[2]]);*/
 
 	while( fp->free != 0 ) {		
 		if( wt[prio = FRemove(fp,wt)] != INFINITE  ){
