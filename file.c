@@ -145,11 +145,9 @@ void PreencheDicionario(FILE * f, t_lista * dicionario, short numchars[MAX_STR])
 	while((nova_palavra=LePalavra(f)) != (char *)NULL){
         tamanho = strlen(nova_palavra);
         for(iterador=dicionario;iterador!=NULL;iterador=getProxElementoLista(iterador)) {
-
             payd=(payload_dicionario*) getItemLista(iterador);
             if(payd->num_char==tamanho) break;
         }
-
         if(iterador == NULL ) {
             free(nova_palavra);
             continue;
