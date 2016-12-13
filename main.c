@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     	exit ( 0 );
   	}
 
-
+	/* Inicialzação do dicionário */
 	dicionario=iniLista();
 
 	/* Começamos por carregar os exercícios para a memória */
